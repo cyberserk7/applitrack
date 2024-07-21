@@ -3,6 +3,7 @@ import { Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import AuthProvider from "@/providers/AuthProvider";
 
 const inter = Inter_Tight({ subsets: ["latin"] });
 
@@ -18,10 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("", inter.className)}>
-        {children}
-        <Toaster position="bottom-right" />
-      </body>
+      <AuthProvider>
+        <body className={cn("", inter.className)}>
+          {children}
+          <Toaster position="bottom-right" />
+        </body>
+      </AuthProvider>
     </html>
   );
 }

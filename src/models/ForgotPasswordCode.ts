@@ -3,7 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface ForgotPasswordCode extends Document {
     code: string;
     userId: string;
-    createdAt: Date;
+    expiryDate: Date;
 }
 
 const ForgotPasswordCodeSchema = new Schema<ForgotPasswordCode>({
@@ -14,11 +14,12 @@ const ForgotPasswordCodeSchema = new Schema<ForgotPasswordCode>({
     userId: {
         type: String,
         required: true,
+        unique: true
     },
-    createdAt: {
+    expiryDate: {
         type: Date,
         required: true,
-        default: new Date(),
+        default: new Date(Date.now()+360000),
     },
 })
 

@@ -1,5 +1,6 @@
 import { resend } from "@/lib/resend";
 import VerificationEmail from "./VerificationEmail";
+import OTPEmail from "./OTPEmail";
 
 interface APIResponse  {
     success: boolean,
@@ -25,6 +26,30 @@ export async function SendVerificationEmail({email, token, name} : {
         }
     } catch(error) {
         console.log(error)  
+        return {
+            success: false,
+            message: "Error sending email"
+        }
+    }
+}
+
+export async function SendOTPEmail({email, code, name} : {
+    email: string, code: string, name: string
+}): Promise<APIResponse> {
+    try {
+        await resend.emails.send({
+            from: 'onboarding@resend.dev',
+            to: email,
+            subject: 'AppliTracker | Verification Email',
+            react: OTPEmail({code: code, name: name})
+        })
+
+        return {    
+            success: true,
+            message: "Email sent"
+        }
+    } catch (error) {
+        console.log(error);
         return {
             success: false,
             message: "Error sending email"

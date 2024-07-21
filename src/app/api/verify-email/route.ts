@@ -19,7 +19,7 @@ export async function POST(req: Request) {
             })
         }
 
-        const hasExpired = existingToken.expiryDate > new Date();
+        const hasExpired = existingToken.expiryDate < new Date(Date.now());
 
         if(hasExpired) {
             return Response.json({
@@ -55,6 +55,10 @@ export async function POST(req: Request) {
         user.isVerified = true;
         await user.save();
 
+        await VerificationTokenModel.deleteOne({
+            _id: existingToken._id
+        })
+
         return Response.json({
             success: true,
             message: "User verified successfully"
@@ -72,3 +76,4 @@ export async function POST(req: Request) {
         })
     }
 }
+

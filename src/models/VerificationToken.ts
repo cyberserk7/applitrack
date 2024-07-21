@@ -9,11 +9,12 @@ const VerificationTokenSchema = new Schema<VerificationToken>({
     userId: {
         type: String,
         required: true,
+        unique: true
     },
     expiryDate: {
         type: Date,
         required: true,
-        default: new Date(Date.now() + 3600000)
+        default: new Date(Date.now()+3600000)
     },
 })
 

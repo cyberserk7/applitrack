@@ -41,10 +41,12 @@ export const VerifyEmailChecker = () => {
         {loading ? (
           <Loader2 className="size-7 animate-spin" />
         ) : (
-          <div className="flex flex-col gap-2 items-center">
-            <AlertCircle className="size-7" strokeWidth={1.5} />
-            <span>{error}</span>
-          </div>
+          error && (
+            <div className="flex flex-col gap-2 items-center">
+              <AlertCircle className="size-7" strokeWidth={1.5} />
+              <span>{error}</span>
+            </div>
+          )
         )}
       </div>
       {error && (

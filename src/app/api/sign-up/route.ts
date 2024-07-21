@@ -43,7 +43,7 @@ export async function POST(req: Request) {
                 // create new token
                 const verificationToken = await VerificationTokenModel.create({
                     userId: user._id,
-                    createAt: new Date(Date.now())
+                    expiryDate: new Date(Date.now()+3600000)
                 })
 
                 // send verification email
@@ -65,7 +65,7 @@ export async function POST(req: Request) {
             // create new token
             const verificationToken = await VerificationTokenModel.create({
                 userId: newUser._id,
-                createdAt: new Date(Date.now())
+                expiryDate: new Date(Date.now()+3600000)
             })
     
             // send verification email  

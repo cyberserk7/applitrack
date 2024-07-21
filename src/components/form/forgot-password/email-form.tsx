@@ -8,7 +8,6 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -16,14 +15,13 @@ import { ErrorMsg } from "../error-msg";
 import { useState } from "react";
 import { SubmitButton } from "@/components/submit-button";
 import { z } from "zod";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
-export const EmailForm = ({
-  setEmail,
-}: {
-  setEmail: (email: string) => void;
-}) => {
+export const EmailForm = ({ nextStep }: { nextStep: () => void }) => {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(emailSchema),
@@ -32,8 +30,22 @@ export const EmailForm = ({
     },
   });
 
-  const onSubmit = (values: z.infer<typeof emailSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof emailSchema>) => {
+    setSubmitting(true);
+    setError("");
+    try {
+      const res = await axios.post("/api/check-email", values);
+      if (res.data.success) {
+        router.replace(`/forgot-password?email=${values.email}`);
+        nextStep();
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setError(error.response?.data.message);
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
