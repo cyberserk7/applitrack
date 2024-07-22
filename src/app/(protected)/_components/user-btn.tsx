@@ -25,7 +25,7 @@ export const UserButton = () => {
 
   if (!mounted || !user) {
     return (
-      <Button size={"sm"} variant={"ghost"} className="p-0">
+      <Button size={"sm"} variant={"ghost"} className="p-0 w-full">
         <Skeleton className="w-full h-full"></Skeleton>
       </Button>
     );
@@ -33,13 +33,13 @@ export const UserButton = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="select-none">
+      <DropdownMenuTrigger className="select-none w-full">
         <Button
           size={"sm"}
           variant={"outline"}
-          className="w-full shadow-sm font-normal text-gray-700 flex justify-between"
+          className="w-full shadow-sm font-normal text-gray-700 flex justify-between px-3"
         >
-          <span>{user?.name}</span>
+          <span className="line-clamp-1">{user?.name}</span>
           <ChevronsUpDown className="size-4 text-gray-400" />
         </Button>
       </DropdownMenuTrigger>

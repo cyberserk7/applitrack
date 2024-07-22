@@ -19,11 +19,8 @@ export const Navbar = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (
-      pathname === "/dashboard" &&
-      (!paramsView || (paramsView !== "grid" && paramsView !== "list"))
-    ) {
-      router.replace("/dashboard?view=list");
+    if (!paramsView || (paramsView !== "grid" && paramsView !== "list")) {
+      router.push("?view=list");
     }
   }, [paramsView, pathname]);
 
