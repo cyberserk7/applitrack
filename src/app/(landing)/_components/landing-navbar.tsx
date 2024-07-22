@@ -18,6 +18,7 @@ export const LandingNavbar = () => {
         </Link>
         <Button
           className="bg-gradient-to-r from-red-600 to-yellow-600 font-normal"
+          size={"sm"}
           asChild
         >
           <Link href={"/sign-up"}>Get Started</Link>

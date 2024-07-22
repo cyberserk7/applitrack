@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function SignUpPage() {
   return (
-    <div className="w-full md:max-w-sm rounded-xl bg-white px-5 py-5 space-y-5">
+    <div className="w-full md:max-w-sm rounded-xl bg-white px-5 py-5 space-y-5 shadow-md">
       <div>
         <h1 className="text-lg font-semibold">Create Account</h1>
         <p className="text-sm text-gray-500">

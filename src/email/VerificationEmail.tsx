@@ -20,7 +20,7 @@ interface VerificationEmailProps {
 export const VerificationEmail = ({ name, url }: VerificationEmailProps) => (
   <Html>
     <Head />
-    <Preview>Verify your Applitracker account</Preview>
+    <Preview>Verify your Applitrack account</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
@@ -37,7 +37,7 @@ export const VerificationEmail = ({ name, url }: VerificationEmailProps) => (
             Hey <strong>{name}</strong>!
           </Text>
           <Text style={text}>
-            Thank you for signing up for AppliTracker. Please click{" "}
+            Thank you for signing up for AppliTrack. Please click{" "}
             <a href={url} target="_blank">
               here
             </a>{" "}
@@ -47,7 +47,7 @@ export const VerificationEmail = ({ name, url }: VerificationEmailProps) => (
             The verification link will expire in 1 hour.
           </Text>
           <Text style={text}>
-            Please ignore this email if you did not sign up for AppliTracker.
+            Please ignore this email if you did not sign up for AppliTrack.
           </Text>
         </Section>
       </Container>
