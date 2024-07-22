@@ -44,7 +44,9 @@ export const UserButton = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[--radix-dropdown-menu-trigger-width] max-h-[h-[--radix-dropdown-menu-content-available-height]] text-gray-700">
-        <DropdownMenuItem>{user?.email}</DropdownMenuItem>
+        <DropdownMenuItem className="text-gray-400">
+          {user?.email}
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => {

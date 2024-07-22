@@ -9,18 +9,21 @@ export interface User extends Document {
 }
 
 export interface JobApplication extends Document {
-    jobTitle: string;
+    jobPostLink: string;
+    jobRole: string;
     companyName: string;
     salary: number;
     notes: string;
     interviewDate: Date;
+    jobCountry: string;
     jobLocation: string;
     workType: "Onsite" | "Remote";
-    applicationStatus:  "Applied" | "Interview Scheduled" |  "Got Offer" | "Declined";
+    applicationStatus: "Bookmarked" | "Applied" | "Interview Scheduled" |  "Got Offer";
+    isArchived: boolean;
 }
 
 const JobApplicationSchema = new Schema<JobApplication>({
-    jobTitle: {
+    jobRole: {
         type: String,
         required: [true, "Job title is required"],
     },
@@ -40,6 +43,10 @@ const JobApplicationSchema = new Schema<JobApplication>({
         type: Date,
         required: false,
     },
+    jobCountry: {
+        type: String,
+        required: [true, "Job country is required"],
+    },
     jobLocation: {
         type: String,
         required: [true, "Job location is required"],
@@ -54,6 +61,10 @@ const JobApplicationSchema = new Schema<JobApplication>({
         required: [true, "Application status is required"],
         enum: ["Applied", "Interview Scheduled", "Got Offer", "Declined"],
     },
+    isArchived: {
+        type: Boolean,
+        default: false
+    }
 })
 
 const UserSchema = new Schema<User>({

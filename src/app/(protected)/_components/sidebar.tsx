@@ -6,8 +6,6 @@ import {
   CircleHelp,
   FileText,
   Grid2X2,
-  Home,
-  LogOut,
   LucideIcon,
   MessageSquareMore,
   PlusCircle,
@@ -51,11 +49,6 @@ export const Sidebar = () => {
       <div className="flex flex-col px-5">
         <SidebarItem icon={Search} label={"Search"} type="search" />
         <SidebarItem icon={Settings} label="Settings" type="settings" />
-        <SidebarItem
-          icon={MessageSquareMore}
-          label="Feedback"
-          type="feedback"
-        />
         <SidebarItem icon={Trash} label="Trash" type="trash" />
         <SidebarItem
           icon={PlusCircle}
@@ -76,6 +69,11 @@ export const Sidebar = () => {
       </div>
       <div className="w-full px-5 flex flex-col flex-1 justify-end py-2 xl:py-3">
         <SidebarItem icon={CircleHelp} label="Support" type="support" />
+        <SidebarItem
+          icon={MessageSquareMore}
+          label="Feedback"
+          type="feedback"
+        />
       </div>
     </aside>
   );

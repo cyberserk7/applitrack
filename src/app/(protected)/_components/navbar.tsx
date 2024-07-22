@@ -40,7 +40,7 @@ export const Navbar = () => {
         <Button
           size={"sm"}
           variant={"ghost"}
-          className="border font-normal px-2.5 text-gray-700 shadow-sm"
+          className="border font-normal px-2.5 text-gray-700 shadow-sm hidden md:flex"
         >
           <Plus className="size-4 mr-2" />
           New application

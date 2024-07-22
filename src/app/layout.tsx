@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
 import AuthProvider from "@/providers/AuthProvider";
+import { ModalProvider } from "@/providers/ModalProvider";
 
 const inter = Inter_Tight({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <body className={cn("", inter.className)}>
           {children}
           <Toaster position="bottom-right" />
+          <ModalProvider />
         </body>
       </AuthProvider>
     </html>
