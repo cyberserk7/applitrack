@@ -74,8 +74,12 @@ html {
   }
 }
 
-@layer components {
+@layer utilities {
   .container {
     @apply w-full md:max-w-7xl mx-auto;
+  }
+  .dropdown-menu-content-width-same-as-its-trigger {
+    width: "var(--radix-dropdown-menu-trigger-width)";
+    max-height: "--radix-dropdown-menu-content-available-height";
   }
 }

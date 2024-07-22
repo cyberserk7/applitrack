@@ -18,7 +18,6 @@ const config = {
       },
     },
     extend: {
-      
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -53,6 +52,8 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        dashboardbg: "#F8F8F8",
+        dashboardbgdarker: "#ECECEC"
       },
       borderRadius: {
         lg: "var(--radius)",
