@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useModalStore } from "@/hooks/use-zustand";
+import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
 import {
   addApplicationSchema,
   applicationStatuses,
@@ -27,11 +27,15 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/submit-button";
+import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
+import { ErrorMsg } from "../error-msg";
 
 export const AddApplicationForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const { onClose } = useModalStore();
+  const { fetchApplications } = useApplicationStore();
 
   const form = useForm<z.infer<typeof addApplicationSchema>>({
     resolver: zodResolver(addApplicationSchema),
@@ -48,7 +52,21 @@ export const AddApplicationForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof addApplicationSchema>) => {
-    console.log(values);
+    setSubmitting(true);
+    try {
+      const res = await axios.post("/api/add-application", values);
+      if (res.data.success) {
+        onClose();
+        toast.success("Application added successfully");
+        fetchApplications();
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setError(error.response?.data.message);
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -224,7 +242,10 @@ export const AddApplicationForm = () => {
             )}
           />
         </div>
-        <SubmitButton isLoading={submitting} label="Add Application" />
+        <div className="flex flex-col gap-2">
+          {error && <ErrorMsg error={error} />}
+          <SubmitButton isLoading={submitting} label="Add Application" />
+        </div>
       </form>
     </Form>
   );

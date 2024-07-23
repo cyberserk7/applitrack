@@ -23,6 +23,10 @@ export interface JobApplication extends Document {
 }
 
 const JobApplicationSchema = new Schema<JobApplication>({
+    jobPostLink: {
+        type: String,
+        required: [true, "Job post link is required"],
+    },
     jobRole: {
         type: String,
         required: [true, "Job title is required"],
@@ -38,10 +42,12 @@ const JobApplicationSchema = new Schema<JobApplication>({
     notes: {
         type: String,
         required: false,
+        default: null,
     },
     interviewDate: {
         type: Date,
         required: false,
+        default: null,
     },
     jobCountry: {
         type: String,
@@ -59,7 +65,7 @@ const JobApplicationSchema = new Schema<JobApplication>({
     applicationStatus: {
         type: String,
         required: [true, "Application status is required"],
-        enum: ["Applied", "Interview Scheduled", "Got Offer", "Declined"],
+        enum: ["Bookmarked", "Applied", "Interview Scheduled", "Got Offer"],
     },
     isArchived: {
         type: Boolean,

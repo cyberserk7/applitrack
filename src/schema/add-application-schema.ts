@@ -10,7 +10,6 @@ export const applicationStatuses = [
     "Applied",
     "Interview Scheduled",
     "Got Offer",
-    "Declined"
 ]
 
 export const addApplicationSchema = z.object({
@@ -21,5 +20,5 @@ export const addApplicationSchema = z.object({
   jobCountry: z.string().min(1),
   jobLocation: z.string().min(1),
   workType: z.enum(["Onsite", "Remote"]),
-  applicationStatus: z.enum(["Bookmarked", "Applied", "Interview Scheduled", "Got Offer", "Declined"]),
+  applicationStatus: z.enum(["Bookmarked", "Applied", "Interview Scheduled", "Got Offer"]),
 });

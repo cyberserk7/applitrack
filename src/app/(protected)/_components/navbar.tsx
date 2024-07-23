@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useModalStore } from "@/hooks/use-zustand";
 import { cn } from "@/lib/utils";
 import {
   Columns2,
@@ -17,6 +18,7 @@ export const Navbar = () => {
   const searchParams = useSearchParams();
   const paramsView = searchParams.get("view");
   const router = useRouter();
+  const { onOpen } = useModalStore();
 
   useEffect(() => {
     if (!paramsView || (paramsView !== "grid" && paramsView !== "list")) {
@@ -41,6 +43,7 @@ export const Navbar = () => {
           size={"sm"}
           variant={"ghost"}
           className="border font-normal px-2.5 text-gray-700 shadow-sm hidden md:flex"
+          onClick={() => onOpen("new-application")}
         >
           <Plus className="size-4 mr-2" />
           New application
