@@ -6,12 +6,9 @@ import { cn } from "@/lib/utils";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import {
-  ArrowRight,
-  BookmarkMinus,
   FileSliders,
   SquareArrowOutUpRight,
   SquareArrowUpRight,
-  Trash,
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -100,10 +97,10 @@ export const ApplicationListItem = ({
         <span className="text-xs text-gray-400 hidden md:block">
           {application.applicationStatus[0]}A-{index + 1}
         </span>
-        <span className="px-2 py-1 rounded bg-orange-100/30 text-xs text-orange-600 border border-orange-200">
+        <span className="px-2 py-1 rounded bg-orange-100/30 text-xs text-orange-600 border border-orange-200 ">
           {LPA} LPA
         </span>
-        <span className="text-sm font-medium line-clamp-1">
+        <span className="flex-1 text-sm font-medium line-clamp-1">
           {application.jobRole}, {application.companyName}{" "}
         </span>
       </div>

@@ -7,15 +7,11 @@ import {
   CircleFadingPlus,
 } from "lucide-react";
 import { ApplicationGroup } from "../_components/application-status/application-group";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import { useApplicationStore } from "@/hooks/use-zustand";
 
 export default function Dashboard() {
-  const { applications, fetchApplications, loading } = useApplicationStore();
-
-  useEffect(() => {
-    fetchApplications();
-  }, []);
+  const { applications, loading } = useApplicationStore();
 
   return (
     <div className="h-full p-5 xl:p-10 space-y-5 w-full">

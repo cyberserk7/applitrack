@@ -8,7 +8,6 @@ export async function PATCH(request: Request) {
     try {
         const url = new URL(request.url);
         const applicationId = url.searchParams.get("applicationId");
-        console.log(applicationId);
 
         if (!applicationId) {
             return Response.json({

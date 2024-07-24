@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarLink } from "./sidebar-link";
+import { useApplicationStore } from "@/hooks/use-zustand";
+import { useEffect } from "react";
 
 interface SidebarNavLinkProps {
   label: string;
