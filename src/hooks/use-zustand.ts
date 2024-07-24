@@ -6,6 +6,7 @@ export type ModalType = "new-application" | "trash" | "feedback" | "settings" | 
 interface ModalData {
     application?: JobApplication;
     applicationStatus?: string;
+    applications?: JobApplication[];
 }
 
 interface ModalStore {
@@ -27,15 +28,19 @@ export const useModalStore = create<ModalStore>((set) => ({
 
 interface ApplicationStoreProps {
     applications: JobApplication[];
+    archivedApplications: JobApplication[];
     loading: boolean;
     fetchApplications: () => Promise<void>;
     setApplications: (applications: JobApplication[]) => void;
+    setArchivedApplications: (applications: JobApplication[]) => void;
     refreshApplications: () => Promise<void>;
     trashCount: number;
+    setTrashCount: (count: number) => void;
 }
 
 export const useApplicationStore = create<ApplicationStoreProps>((set) => ({
     applications: [],
+    archivedApplications: [],
     trashCount: 0,
     loading: false,
     fetchApplications: async () => {
@@ -44,6 +49,7 @@ export const useApplicationStore = create<ApplicationStoreProps>((set) => ({
             const response = await axios.get(`/api/get-applications`);
             if(response.data.success) {
                 set({ applications: response.data.applications.filter((app: JobApplication) => !app.isArchived) });
+                set({ archivedApplications: response.data.applications.filter((app: JobApplication) => app.isArchived) });
                 set({ trashCount: response.data.applications.filter((app: JobApplication) => app.isArchived).length})
             }
         } catch (error) {
@@ -55,15 +61,23 @@ export const useApplicationStore = create<ApplicationStoreProps>((set) => ({
     setApplications: (applications: JobApplication[]) => {
         set({ applications: applications }); 
     },
+    setArchivedApplications: (applications: JobApplication[]) => {
+        set({ archivedApplications: applications }); 
+    },
     refreshApplications: async () => {
         try {
             const response = await axios.get(`/api/get-applications`);
             if(response.data.success) {
                 set({ applications: response.data.applications.filter((app: JobApplication) => !app.isArchived) });
+                set({ archivedApplications: response.data.applications.filter((app: JobApplication) => app.isArchived) });
                 set({ trashCount: response.data.applications.filter((app: JobApplication) => app.isArchived).length});
             }
         } catch (error) {
             console.error('Failed to fetch applications', error);
         }
     }, 
+    setTrashCount: (count: number) => {
+        set({ trashCount: count });
+    }
+
 }));

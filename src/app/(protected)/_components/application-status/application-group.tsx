@@ -74,7 +74,7 @@ export const ApplicationGroup = ({
         </div>
       </div>
       {view === "grid" ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-8 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-5">
           {applications.length === 0 ? (
             <div className="aspect-square h-fit border rounded-lg border-dashed border-gray-300"></div>
           ) : (

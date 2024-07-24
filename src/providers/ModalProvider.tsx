@@ -2,6 +2,7 @@
 
 import { AddApplicationModal } from "@/components/modals/add-application-modal";
 import { ApplicationDetailsModal } from "@/components/modals/application-details-modal";
+import TrashCommandModal from "@/components/modals/trash-command-modal";
 import { useEffect, useState } from "react";
 
 export const ModalProvider = () => {
@@ -18,6 +19,7 @@ export const ModalProvider = () => {
     <>
       <AddApplicationModal />
       <ApplicationDetailsModal />
+      <TrashCommandModal />
     </>
   );
 };

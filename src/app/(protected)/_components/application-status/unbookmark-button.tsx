@@ -21,14 +21,20 @@ export const UnbookmarkButton = ({
   applicationId: string;
 }) => {
   const [open, setOpen] = useState(false);
-  const { applications, setApplications, refreshApplications } =
-    useApplicationStore();
+  const {
+    applications,
+    setApplications,
+    refreshApplications,
+    setTrashCount,
+    trashCount,
+  } = useApplicationStore();
 
   const handleArchiveApplication = async (applicationId: string) => {
     const updatedApplications = applications.filter(
       (application: JobApplication) => application._id !== applicationId
     );
     setApplications(updatedApplications);
+    setTrashCount(trashCount + 1);
     try {
       await axios.patch(
         `/api/archive-application?applicationId=${applicationId}`
