@@ -6,6 +6,8 @@ import { cn } from "@/lib/utils";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import {
+  ArrowRight,
+  BookmarkMinus,
   FileSliders,
   SquareArrowOutUpRight,
   SquareArrowUpRight,
@@ -13,6 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { UnbookmarkButton } from "./unbookmark-button";
 
 export const ApplicationListItem = ({
   application,
@@ -33,21 +36,51 @@ export const ApplicationListItem = ({
 
   const { applications, setApplications, refreshApplications } =
     useApplicationStore();
-  const handleDeleteApplication = async (applicationId: string) => {
-    const updatedApplications = applications.filter(
-      (application: JobApplication) => application._id !== applicationId
+
+  const handleMoveApplication = async (
+    applicationId: string,
+    status: string
+  ) => {
+    const updatedApplications = applications.map(
+      (application: JobApplication) => {
+        if (application._id === applicationId) {
+          return { ...application, applicationStatus: status };
+        }
+        return application;
+      }
     );
-    setApplications(updatedApplications);
+    setApplications(updatedApplications as JobApplication[]);
     try {
       await axios.patch(
-        `/api/archive-application?applicationId=${applicationId}`
+        `/api/move-application?applicationId=${applicationId}&status=${status}`
       );
-      toast.success("Application added to trash");
     } catch (error) {
-      toast.error("Failed to delete application");
+      toast.error("Failed to move application");
+    } finally {
       refreshApplications();
     }
   };
+
+  let nextStep: string | undefined = undefined;
+  let prevStep: string | undefined = undefined;
+
+  switch (application.applicationStatus) {
+    case "Bookmarked":
+      nextStep = "Applied";
+      break;
+    case "Applied":
+      nextStep = "Interview Scheduled";
+      prevStep = "Bookmarked";
+      break;
+    case "Interview Scheduled":
+      nextStep = "Got Offer";
+      prevStep = "Applied";
+      break;
+    case "Got Offer":
+      break;
+    default:
+      break;
+  }
 
   return (
     <div
@@ -75,7 +108,7 @@ export const ApplicationListItem = ({
         </span>
       </div>
       <div className="hidden lg:flex items-center gap-5">
-        <div className="flex items-center gap-2 text-gray-400 text-sm">
+        <div className="flex items-center gap-3 text-gray-400 text-sm">
           {isRemote ? (
             <span className="px-2 py-1 rounded bg-green-100/30 text-xs text-green-600 border border-green-200">
               Remote
@@ -85,6 +118,26 @@ export const ApplicationListItem = ({
               {application.jobLocation}, {application.jobCountry}
             </span>
           )}
+          {prevStep && (
+            <button
+              className="flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700"
+              onClick={() => {
+                handleMoveApplication(application._id as string, prevStep);
+              }}
+            >
+              Move to {prevStep}
+            </button>
+          )}
+          {nextStep && (
+            <button
+              className="flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700"
+              onClick={() => {
+                handleMoveApplication(application._id as string, nextStep);
+              }}
+            >
+              Move to {nextStep}
+            </button>
+          )}
         </div>
         <div className="flex">
           <Link
@@ -93,15 +146,15 @@ export const ApplicationListItem = ({
           >
             <SquareArrowUpRight className="size-4" />
           </Link>
-          <button className="text-gray-400 p-1 z-10 hover:text-blue-500 transition">
+          <button
+            className="text-gray-400 p-1 z-10 hover:text-blue-500 transition"
+            onClick={() => {
+              onOpen("application-details", { application });
+            }}
+          >
             <FileSliders className="size-4" />
           </button>
-          <button
-            className="text-gray-400 p-1 z-10 hover:text-red-500 transition"
-            onClick={() => handleDeleteApplication(application._id as string)}
-          >
-            <Trash className="size-4" />
-          </button>
+          <UnbookmarkButton applicationId={application._id as string} />
         </div>
       </div>
       <Button className="lg:hidden text-gray-400 px-1" variant={"ghost"}>

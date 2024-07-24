@@ -8,6 +8,14 @@ import { ApplicationListItem } from "./application-list-item";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
 import { useModalStore } from "@/hooks/use-zustand";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ListItemDropdown } from "./list-item-dropdown";
 
 export const ApplicationGroup = ({
   status,
@@ -20,15 +28,19 @@ export const ApplicationGroup = ({
   loading: boolean;
   applications: JobApplication[];
 }) => {
-  const applications = app.filter(
-    (application: JobApplication) => application.applicationStatus === status
-  );
+  const applications = app
+    .filter(
+      (application: JobApplication) => application.applicationStatus === status
+    )
+    .reverse();
 
   const searchParams = useSearchParams();
   const view = searchParams.get("view");
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const { onOpen } = useModalStore();
+
+  const showAddButton = status === "Bookmarked" || status === "Applied";
 
   return (
     <div className="flex flex-col gap-2">
@@ -47,18 +59,18 @@ export const ApplicationGroup = ({
           </div>
         </div>
         <div className="flex items-center text-gray-500">
-          <Button
-            size={"sm"}
-            variant={"ghost"}
-            onClick={() => {
-              onOpen("new-application", { applicationStatus: status });
-            }}
-          >
-            <Plus className="size-4" />
-          </Button>
-          <Button size={"sm"} variant={"ghost"}>
-            <Ellipsis className="size-4" />
-          </Button>
+          {showAddButton && (
+            <Button
+              size={"sm"}
+              variant={"ghost"}
+              onClick={() => {
+                onOpen("new-application", { applicationStatus: status });
+              }}
+            >
+              <Plus className="size-4" />
+            </Button>
+          )}
+          <ListItemDropdown status={status} />
         </div>
       </div>
       {view === "grid" ? (
