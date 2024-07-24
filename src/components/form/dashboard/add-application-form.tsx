@@ -31,11 +31,15 @@ import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import { ErrorMsg } from "../error-msg";
 
-export const AddApplicationForm = () => {
+interface AddApplicationFormProps {
+  status?: string;
+}
+
+export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const { onClose } = useModalStore();
-  const { fetchApplications } = useApplicationStore();
+  const { refreshApplications } = useApplicationStore();
 
   const form = useForm<z.infer<typeof addApplicationSchema>>({
     resolver: zodResolver(addApplicationSchema),
@@ -46,7 +50,8 @@ export const AddApplicationForm = () => {
       jobCountry: "",
       jobLocation: "",
       workType: "Onsite",
-      applicationStatus: "Bookmarked",
+      //@ts-ignore
+      applicationStatus: status || "Bookmarked",
       jobPostLink: "",
     },
   });
@@ -56,9 +61,9 @@ export const AddApplicationForm = () => {
     try {
       const res = await axios.post("/api/add-application", values);
       if (res.data.success) {
+        refreshApplications();
         onClose();
         toast.success("Application added successfully");
-        fetchApplications();
       }
     } catch (error) {
       if (error instanceof AxiosError) {

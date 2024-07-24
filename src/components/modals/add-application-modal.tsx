@@ -10,8 +10,10 @@ import { useModalStore } from "@/hooks/use-zustand";
 import { AddApplicationForm } from "../form/dashboard/add-application-form";
 
 export const AddApplicationModal = () => {
-  const { isOpen, onClose, type } = useModalStore();
+  const { isOpen, onClose, type, data } = useModalStore();
   const isModalOpen = isOpen && type === "new-application";
+
+  const { applicationStatus } = data;
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -22,7 +24,7 @@ export const AddApplicationModal = () => {
             Add a job application you&apos;d like to track.
           </DialogDescription>
         </DialogHeader>
-        <AddApplicationForm />
+        <AddApplicationForm status={applicationStatus} />
       </DialogContent>
     </Dialog>
   );

@@ -34,10 +34,6 @@ export async function GET(req: Request) {
         }
 
 
-        revalidatePath("/dashboard")
-
-        console.log(existingUser.jobApplications)
-
         return Response.json({
             success: true,
             applications: existingUser.jobApplications,

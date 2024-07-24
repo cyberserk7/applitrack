@@ -1,31 +1,34 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useApplicationStore } from "@/hooks/use-zustand";
 import { JobApplication } from "@/models/User";
-import axios from "axios";
 import { Ellipsis, Loader2, LucideIcon, Plus } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { ApplicationListItem } from "./application-list-item";
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "usehooks-ts";
+import { useModalStore } from "@/hooks/use-zustand";
 
 export const ApplicationGroup = ({
   status,
   icon: Icon,
-  applications,
-  loading,
+  loading = true,
+  applications: app,
 }: {
   status: "Bookmarked" | "Applied" | "Interview Scheduled" | "Got Offer";
   icon: LucideIcon;
-  applications: JobApplication[];
   loading: boolean;
+  applications: JobApplication[];
 }) => {
-  const searchParams = useSearchParams();
-  const view = searchParams.get("view");
-
-  const filteredApplications = applications.filter(
+  const applications = app.filter(
     (application: JobApplication) => application.applicationStatus === status
   );
+
+  const searchParams = useSearchParams();
+  const view = searchParams.get("view");
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const { onOpen } = useModalStore();
 
   return (
     <div className="flex flex-col gap-2">
@@ -38,13 +41,19 @@ export const ApplicationGroup = ({
               {loading ? (
                 <Loader2 className="size-3 animate-spin" />
               ) : (
-                filteredApplications.length
+                applications.length
               )}
             </small>
           </div>
         </div>
         <div className="flex items-center text-gray-500">
-          <Button size={"sm"} variant={"ghost"}>
+          <Button
+            size={"sm"}
+            variant={"ghost"}
+            onClick={() => {
+              onOpen("new-application", { applicationStatus: status });
+            }}
+          >
             <Plus className="size-4" />
           </Button>
           <Button size={"sm"} variant={"ghost"}>
@@ -54,7 +63,7 @@ export const ApplicationGroup = ({
       </div>
       {view === "grid" ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-8 gap-5">
-          {filteredApplications.length === 0 ? (
+          {applications.length === 0 ? (
             <div className="aspect-square h-fit border rounded-lg border-dashed border-gray-300"></div>
           ) : (
             <div className=""></div>
@@ -62,21 +71,19 @@ export const ApplicationGroup = ({
         </div>
       ) : (
         <div
-          className={cn(
-            "flex flex-col w-full",
-            filteredApplications.length > 0 && ""
-          )}
+          className={cn("flex flex-col w-full", applications.length > 0 && "")}
         >
-          {filteredApplications.length === 0 ? (
+          {applications.length === 0 ? (
             <div className="border border-dashed border-gray-300 rounded-lg h-11"></div>
           ) : (
-            filteredApplications.map((application, index) => (
+            applications.map((application, index) => (
               <ApplicationListItem
                 key={index}
                 application={application}
-                isLastItem={index === filteredApplications.length - 1}
+                isLastItem={index === applications.length - 1}
                 isFirstItem={index === 0}
                 index={index}
+                isMobile={isMobile}
               />
             ))
           )}
