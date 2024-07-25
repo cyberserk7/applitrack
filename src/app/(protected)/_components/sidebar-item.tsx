@@ -10,13 +10,7 @@ export const SidebarItem = ({
 }: {
   icon: LucideIcon;
   label: string;
-  type:
-    | "new-application"
-    | "trash"
-    | "settings"
-    | "search"
-    | "feedback"
-    | "support";
+  type: "new-application" | "trash" | "settings" | "feedback" | "support";
 }) => {
   const { onOpen } = useModalStore();
   const { trashCount, loading } = useApplicationStore();

@@ -16,7 +16,8 @@ import {
 import { SidebarItem } from "./sidebar-item";
 import { SidebarLink } from "./sidebar-link";
 import { useApplicationStore } from "@/hooks/use-zustand";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
+import { SearchBar } from "./search-bar";
 
 interface SidebarNavLinkProps {
   label: string;
@@ -48,15 +49,19 @@ export const Sidebar = () => {
       <div className="py-2 xl:py-3 px-5 w-full">
         <UserButton />
       </div>
-      <div className="flex flex-col px-5">
-        <SidebarItem icon={Search} label={"Search"} type="search" />
-        <SidebarItem icon={Settings} label="Settings" type="settings" />
-        <SidebarItem icon={Trash} label="Trash" type="trash" />
-        <SidebarItem
-          icon={PlusCircle}
-          label="New Application"
-          type="new-application"
-        />
+      <div className="px-5 space-y-3">
+        <Suspense>
+          <SearchBar />
+        </Suspense>
+        <div className="flex flex-col ">
+          <SidebarItem icon={Settings} label="Settings" type="settings" />
+          <SidebarItem icon={Trash} label="Trash" type="trash" />
+          <SidebarItem
+            icon={PlusCircle}
+            label="New Application"
+            type="new-application"
+          />
+        </div>
       </div>
       <div className="w-full h-px border-b" />
       <div className="flex flex-col px-5">

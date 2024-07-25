@@ -74,9 +74,9 @@ export const Navbar = () => {
             <ListIcon strokeWidth={2} className="size-4" />
           </button>
         </div>
-        <button className="hidden md:block p-2">
+        {/* <button className="hidden md:block p-2">
           <SlidersHorizontal className="size-4 text-gray-700" />
-        </button>
+        </button> */}
       </div>
     </div>
   );

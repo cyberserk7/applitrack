@@ -22,21 +22,21 @@ export const ApplicationGroup = ({
   icon: Icon,
   loading = true,
   applications: app,
+  view,
+  isMobile,
 }: {
   status: "Bookmarked" | "Applied" | "Interview Scheduled" | "Got Offer";
   icon: LucideIcon;
   loading: boolean;
   applications: JobApplication[];
+  view: string;
+  isMobile: boolean;
 }) => {
   const applications = app
     .filter(
       (application: JobApplication) => application.applicationStatus === status
     )
     .reverse();
-
-  const searchParams = useSearchParams();
-  const view = searchParams.get("view");
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const { onOpen } = useModalStore();
 
