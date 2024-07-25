@@ -1,12 +1,13 @@
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import { create } from "zustand";
-export type ModalType = "new-application" | "trash" | "feedback" | "settings" | "search" | "support" | "edit-application" | "application-details"
+export type ModalType = "new-application" | "trash" | "feedback" | "settings" | "search" | "support" | "edit-application" | "application-details" | "set-interview-date"
 
 interface ModalData {
     application?: JobApplication;
     applicationStatus?: string;
     applications?: JobApplication[];
+    applicationId?: string;
 }
 
 interface ModalStore {

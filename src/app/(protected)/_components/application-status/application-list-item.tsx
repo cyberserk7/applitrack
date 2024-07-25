@@ -79,6 +79,26 @@ export const ApplicationListItem = ({
       break;
   }
 
+  const isInterviewScheduled =
+    application.applicationStatus === "Interview Scheduled";
+
+  let daysUntilInterview = 0;
+  if (application.interviewDate) {
+    const today = new Date();
+    const interviewDate = new Date(application.interviewDate);
+    daysUntilInterview = Math.ceil(
+      (interviewDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+    );
+  }
+
+  let canMoveToNextStep = true;
+  if (
+    application.applicationStatus === "Interview Scheduled" &&
+    (daysUntilInterview > 0 || !application.interviewDate)
+  ) {
+    canMoveToNextStep = false;
+  }
+
   return (
     <div
       className={cn(
@@ -103,6 +123,31 @@ export const ApplicationListItem = ({
         <span className="flex-1 text-sm font-medium line-clamp-1">
           {application.jobRole}, {application.companyName}{" "}
         </span>
+        {isInterviewScheduled &&
+          (application.interviewDate ? (
+            <div
+              className={cn(
+                "px-2 py-1 rounded bg-purple-100/30 text-xs text-purple-600 border border-purple-200",
+                daysUntilInterview <= 0 &&
+                  "bg-green-100/30 text-green-600  border-green-200"
+              )}
+            >
+              {daysUntilInterview > 0
+                ? `Scheduled in ${daysUntilInterview} days`
+                : "Interview done"}
+            </div>
+          ) : (
+            <button
+              className="px-2 py-1 rounded bg-red-100/30 text-xs text-red-600 border border-red-200"
+              onClick={() => {
+                onOpen("set-interview-date", {
+                  applicationId: application._id as string,
+                });
+              }}
+            >
+              {application.interviewDate ? "Scheduled" : "Set Date"}
+            </button>
+          ))}
       </div>
       <div className="hidden lg:flex items-center gap-5">
         <div className="flex items-center gap-3 text-gray-400 text-sm">
@@ -115,7 +160,7 @@ export const ApplicationListItem = ({
               {application.jobLocation}, {application.jobCountry}
             </span>
           )}
-          {prevStep && (
+          {prevStep && !application.interviewDate && (
             <button
               className="flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700"
               onClick={() => {
@@ -125,7 +170,7 @@ export const ApplicationListItem = ({
               Move to {prevStep}
             </button>
           )}
-          {nextStep && (
+          {nextStep && canMoveToNextStep && (
             <button
               className="flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700"
               onClick={() => {
