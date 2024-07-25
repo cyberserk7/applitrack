@@ -30,15 +30,13 @@ export const DashboardApplications = ({
       (app: JobApplication) =>
         app.jobRole.toLowerCase().includes(searchQuery.toLowerCase()) ||
         app.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        app.workType.toLowerCase().includes(searchQuery.toLowerCase()) ||
         app.jobCountry.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        app.jobLocation.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        app.applicationStatus.toLowerCase().includes(searchQuery.toLowerCase())
+        app.jobLocation.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }
 
   return (
-    <div className="h-full p-5 xl:p-10 space-y-5 w-full">
+    <div className="h-full p-3 xl:p-10 space-y-5 w-full">
       <ApplicationGroup
         status="Bookmarked"
         icon={Bookmark}

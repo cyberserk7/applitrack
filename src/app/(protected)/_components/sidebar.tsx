@@ -15,8 +15,7 @@ import {
 } from "lucide-react";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarLink } from "./sidebar-link";
-import { useApplicationStore } from "@/hooks/use-zustand";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import { SearchBar } from "./search-bar";
 
 interface SidebarNavLinkProps {
