@@ -33,8 +33,12 @@ export const ListItemDropdown = ({
   status: "Bookmarked" | "Applied" | "Interview Scheduled" | "Got Offer";
 }) => {
   const [mounted, setMounted] = useState(false);
-  const { applications, setApplications, refreshApplications } =
-    useApplicationStore();
+  const {
+    applications,
+    setApplications,
+    refreshApplications,
+    refreshOverlappingInterviews,
+  } = useApplicationStore();
 
   useEffect(() => {
     setMounted(true);
@@ -61,6 +65,7 @@ export const ListItemDropdown = ({
       toast.error("Error clearing list");
     } finally {
       refreshApplications();
+      refreshOverlappingInterviews();
     }
   };
 

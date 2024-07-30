@@ -28,6 +28,7 @@ export const useModalStore = create<ModalStore>((set) => ({
 
 
 interface ApplicationStoreProps {
+    overlappingInterviews: JobApplication[];
     applications: JobApplication[];
     archivedApplications: JobApplication[];
     loading: boolean;
@@ -37,10 +38,12 @@ interface ApplicationStoreProps {
     refreshApplications: () => Promise<void>;
     trashCount: number;
     setTrashCount: (count: number) => void;
+    refreshOverlappingInterviews: () => Promise<void>;
 }
 
 export const useApplicationStore = create<ApplicationStoreProps>((set) => ({
     applications: [],
+    overlappingInterviews: [],
     archivedApplications: [],
     trashCount: 0,
     loading: false,
@@ -79,6 +82,16 @@ export const useApplicationStore = create<ApplicationStoreProps>((set) => ({
     }, 
     setTrashCount: (count: number) => {
         set({ trashCount: count });
+    },
+    refreshOverlappingInterviews: async () => {
+        try {
+            const response = await axios.get(`/api/get-overlapping-interviews`);
+            if(response.data.success) {
+                set({ overlappingInterviews: response.data.overlaps });
+            }
+        } catch (error) {
+            console.error('Failed to fetch overlapping interviews', error);
+        }  
     }
 
 }));

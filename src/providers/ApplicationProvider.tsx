@@ -8,10 +8,12 @@ export const ApplicationProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { fetchApplications } = useApplicationStore();
+  const { fetchApplications, refreshOverlappingInterviews } =
+    useApplicationStore();
 
   useEffect(() => {
     fetchApplications();
+    refreshOverlappingInterviews();
   }, []);
 
   return <>{children}</>;

@@ -30,6 +30,7 @@ export default function TrashCommandModal() {
     archivedApplications,
     applications,
     refreshApplications,
+    refreshOverlappingInterviews,
     setArchivedApplications,
     setApplications,
     setTrashCount,
@@ -68,6 +69,7 @@ export default function TrashCommandModal() {
       toast.error("Failed to retore application");
     } finally {
       refreshApplications();
+      refreshOverlappingInterviews();
     }
   };
 

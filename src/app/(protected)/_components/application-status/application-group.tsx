@@ -2,19 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { JobApplication } from "@/models/User";
-import { Ellipsis, Loader2, LucideIcon, Plus } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { Divide, Info, Loader2, LucideIcon, Plus } from "lucide-react";
 import { ApplicationListItem } from "./application-list-item";
 import { cn } from "@/lib/utils";
-import { useMediaQuery } from "usehooks-ts";
-import { useModalStore } from "@/hooks/use-zustand";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
 import { ListItemDropdown } from "./list-item-dropdown";
 
 export const ApplicationGroup = ({
@@ -39,8 +30,12 @@ export const ApplicationGroup = ({
     .reverse();
 
   const { onOpen } = useModalStore();
+  const { overlappingInterviews } = useApplicationStore();
 
   const showAddButton = status === "Bookmarked" || status === "Applied";
+
+  const showOverlappingInterviewsAlert =
+    overlappingInterviews.length > 0 && status === "Interview Scheduled";
 
   return (
     <div className="flex flex-col gap-2">
@@ -57,6 +52,14 @@ export const ApplicationGroup = ({
               )}
             </small>
           </div>
+          {showOverlappingInterviewsAlert && (
+            <div className="rounded border flex items-center justify-center gap-2 h-5 w-fit aspect-square md:aspect-auto md:px-2  text-red-500 bg-red-100/30 border-red-300">
+              <Info className="size-3" />
+              <small className="hidden md:block">
+                Some interviews have the same date
+              </small>{" "}
+            </div>
+          )}
         </div>
         <div className="flex items-center text-gray-500">
           {showAddButton && (

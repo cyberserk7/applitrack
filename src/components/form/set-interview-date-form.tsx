@@ -37,7 +37,8 @@ export function SetInterviewDateForm({
 }) {
   const [loading, setLoading] = useState(false);
   const { onClose } = useModalStore();
-  const { refreshApplications } = useApplicationStore();
+  const { refreshApplications, refreshOverlappingInterviews } =
+    useApplicationStore();
 
   async function onSubmit(values: z.infer<typeof SetInterviewDateSchema>) {
     setLoading(true);
@@ -55,6 +56,7 @@ export function SetInterviewDateForm({
       toast.error("Something went wrong.");
     } finally {
       refreshApplications();
+      refreshOverlappingInterviews();
       setLoading(false);
     }
   }

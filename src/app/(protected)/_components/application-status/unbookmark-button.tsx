@@ -27,6 +27,7 @@ export const UnbookmarkButton = ({
     refreshApplications,
     setTrashCount,
     trashCount,
+    refreshOverlappingInterviews,
   } = useApplicationStore();
 
   const handleArchiveApplication = async (applicationId: string) => {
@@ -44,6 +45,7 @@ export const UnbookmarkButton = ({
       toast.error("Failed to delete application");
     } finally {
       refreshApplications();
+      refreshOverlappingInterviews();
     }
   };
   return (

@@ -39,7 +39,8 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const { onClose } = useModalStore();
-  const { refreshApplications } = useApplicationStore();
+  const { refreshApplications, refreshOverlappingInterviews } =
+    useApplicationStore();
 
   const form = useForm<z.infer<typeof addApplicationSchema>>({
     resolver: zodResolver(addApplicationSchema),
@@ -62,6 +63,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
       const res = await axios.post("/api/add-application", values);
       if (res.data.success) {
         refreshApplications();
+        refreshOverlappingInterviews();
         onClose();
         toast.success("Application added successfully");
       }

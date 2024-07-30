@@ -31,8 +31,12 @@ export const ApplicationListItem = ({
   const isRemote = application.workType === "Remote";
   const { onOpen } = useModalStore();
 
-  const { applications, setApplications, refreshApplications } =
-    useApplicationStore();
+  const {
+    applications,
+    setApplications,
+    refreshApplications,
+    refreshOverlappingInterviews,
+  } = useApplicationStore();
 
   const handleMoveApplication = async (
     applicationId: string,
@@ -55,6 +59,7 @@ export const ApplicationListItem = ({
       toast.error("Failed to move application");
     } finally {
       refreshApplications();
+      refreshOverlappingInterviews();
     }
   };
 
