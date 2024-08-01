@@ -20,6 +20,8 @@ export interface JobApplication extends Document {
     workType: "Onsite" | "Remote";
     applicationStatus: "Bookmarked" | "Applied" | "Interview Scheduled" |  "Got Offer";
     isArchived: boolean;
+    sendEmail: boolean;
+    emailSent: boolean;
 }
 
 const JobApplicationSchema = new Schema<JobApplication>({
@@ -70,6 +72,14 @@ const JobApplicationSchema = new Schema<JobApplication>({
     isArchived: {
         type: Boolean,
         default: false
+    }, 
+    sendEmail: {
+        type: Boolean,
+        default: false
+    },
+    emailSent: {
+        type: Boolean,
+        default: false 
     }
 })
 

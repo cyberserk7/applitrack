@@ -7,6 +7,7 @@ import { ApplicationListItem } from "./application-list-item";
 import { cn } from "@/lib/utils";
 import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
 import { ListItemDropdown } from "./list-item-dropdown";
+import { ApplicationGridItem } from "./application-grid-item";
 
 export const ApplicationGroup = ({
   status,
@@ -53,7 +54,7 @@ export const ApplicationGroup = ({
             </small>
           </div>
           {showOverlappingInterviewsAlert && (
-            <div className="rounded border flex items-center justify-center gap-2 h-5 w-fit aspect-square md:aspect-auto md:px-2  text-red-500 bg-red-100/30 border-red-300">
+            <div className="rounded border flex items-center justify-center gap-1 h-5 w-fit aspect-square md:aspect-auto md:px-2  text-red-500 bg-red-100/30 border-red-200 font-normal">
               <Info className="size-3" />
               <small className="hidden md:block">
                 Some interviews have the same date
@@ -77,11 +78,13 @@ export const ApplicationGroup = ({
         </div>
       </div>
       {view === "grid" ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-5">
           {applications.length === 0 ? (
             <div className="aspect-square h-fit border rounded-lg border-dashed border-gray-300"></div>
           ) : (
-            <div className=""></div>
+            applications.map((application, index) => (
+              <ApplicationGridItem key={index} application={application} />
+            ))
           )}
         </div>
       ) : (

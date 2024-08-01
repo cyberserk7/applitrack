@@ -36,7 +36,7 @@ export async function GET() {
         })  
     }
 
-    const applicationsWithInterviews = existingUser.jobApplications.filter((app: JobApplication) => app.interviewDate !== null);
+    const applicationsWithInterviews = existingUser.jobApplications.filter((app: JobApplication) => app.interviewDate !== null && app.isArchived === false);
 
     // Group applications by interview date
     const groupedByDate: {[key: string]: JobApplication[]} = {};

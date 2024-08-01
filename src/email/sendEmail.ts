@@ -1,6 +1,8 @@
 import { resend } from "@/lib/resend";
 import VerificationEmail from "./VerificationEmail";
 import OTPEmail from "./OTPEmail";
+import { JobApplication } from "@/models/User";
+import ReminderEmail from "./ReminderEmail";
 
 interface APIResponse  {
     success: boolean,
@@ -44,6 +46,29 @@ export async function SendOTPEmail({email, code, name} : {
             react: OTPEmail({code: code, name: name})
         })
 
+        return {    
+            success: true,
+            message: "Email sent"
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            success: false,
+            message: "Error sending email"
+        }
+    }
+}
+
+export async function SendReminderEmail({email, app, name}: {
+    email: string, app: JobApplication, name: string
+}): Promise<APIResponse> {
+    try {
+        await resend.emails.send({
+            from: 'onboarding@resend.dev',
+            to: email,
+            subject: 'AppliTrack | Interview Reminder',
+            react: ReminderEmail({name: name, companyName: app.companyName, jobTitle: app.jobRole, interviewDate: app.interviewDate})
+        })
         return {    
             success: true,
             message: "Email sent"

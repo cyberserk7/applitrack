@@ -9,7 +9,7 @@ export async function PATCH(request: Request) {
     try {
         const url = new URL(request.url);
         const applicationId = url.searchParams.get("applicationId");
-        const {date} = await request.json();
+        const {date, sendEmail} = await request.json();
 
         
         if (!applicationId) {
@@ -44,6 +44,7 @@ export async function PATCH(request: Request) {
         }
 
         existingUser.jobApplications.find((app: JobApplication) => app._id!.toString() === applicationId).interviewDate = new Date(date);
+        existingUser.jobApplications.find((app: JobApplication) => app._id!.toString() === applicationId).sendEmail = sendEmail;
 
         await existingUser.save();
 

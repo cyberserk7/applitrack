@@ -146,11 +146,11 @@ export const ApplicationListItem = ({
               className="px-2 py-1 rounded bg-red-100/30 text-xs text-red-600 border border-red-200"
               onClick={() => {
                 onOpen("set-interview-date", {
-                  applicationId: application._id as string,
+                  application,
                 });
               }}
             >
-              {application.interviewDate ? "Scheduled" : "Set Date"}
+              Set Date
             </button>
           ))}
       </div>
@@ -177,7 +177,9 @@ export const ApplicationListItem = ({
           )}
           {nextStep && canMoveToNextStep && (
             <button
-              className="flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700"
+              className={cn(
+                "flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700"
+              )}
               onClick={() => {
                 handleMoveApplication(application._id as string, nextStep);
               }}
@@ -185,6 +187,20 @@ export const ApplicationListItem = ({
               Move to {nextStep}
             </button>
           )}
+          {application.applicationStatus === "Interview Scheduled" &&
+            application.interviewDate &&
+            daysUntilInterview <= 0 && (
+              <button
+                className={cn(
+                  "px-2 py-1 rounded bg-green-100/30 text-xs text-green-600 border border-green-200"
+                )}
+                onClick={() => {
+                  handleMoveApplication(application._id as string, "Got Offer");
+                }}
+              >
+                Got Offer
+              </button>
+            )}
         </div>
         <div className="flex">
           <Link

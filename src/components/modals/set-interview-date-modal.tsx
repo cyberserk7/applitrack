@@ -14,7 +14,7 @@ export const SetInterviewDateModal = () => {
   const { isOpen, onClose, type, data } = useModalStore();
   const isModalOpen = isOpen && type === "set-interview-date";
 
-  const { applicationId } = data;
+  const { application } = data;
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -25,7 +25,7 @@ export const SetInterviewDateModal = () => {
             Please select the date when the interview is scheduled.
           </DialogDescription>
         </DialogHeader>
-        <SetInterviewDateForm applicationId={applicationId as string} />
+        <SetInterviewDateForm applicationId={application?._id as string} />
       </DialogContent>
     </Dialog>
   );

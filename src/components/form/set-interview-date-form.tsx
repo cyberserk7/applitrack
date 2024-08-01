@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -12,10 +13,8 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import {
@@ -65,6 +64,7 @@ export function SetInterviewDateForm({
     resolver: zodResolver(SetInterviewDateSchema),
     defaultValues: {
       date: undefined,
+      sendEmail: false,
     },
   });
 
@@ -111,6 +111,30 @@ export function SetInterviewDateForm({
           )}
         />
         <SubmitButton isLoading={loading} label="Submit" />
+        <FormField
+          control={form.control}
+          name="sendEmail"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex items-center space-x-2">
+                <FormControl>
+                  <Checkbox
+                    onCheckedChange={field.onChange}
+                    checked={field.value}
+                    id="terms"
+                  />
+                </FormControl>
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Send reminder email a day before the interview date
+                </label>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       </form>
     </Form>
   );
