@@ -103,25 +103,6 @@ export const ApplicationGridItem = ({
       }}
     >
       <div className="space-y-1.5">
-        {!isMobile && (
-          <div className="flex">
-            <Link
-              href={application.jobPostLink}
-              className="text-gray-400 p-1 z-10 hover:text-blue-500 transition"
-            >
-              <SquareArrowUpRight className="size-4" />
-            </Link>
-            <button
-              className="text-gray-400 p-1 z-10 hover:text-blue-500 transition"
-              onClick={() => {
-                onOpen("application-details", { application });
-              }}
-            >
-              <FileSliders className="size-4" />
-            </button>
-            <UnbookmarkButton applicationId={application._id as string} />
-          </div>
-        )}
         <span className="text-sm md:text-base font-medium text-gray-700 line-clamp-2">
           {application.jobRole}, {application.companyName}
         </span>
@@ -140,7 +121,7 @@ export const ApplicationGridItem = ({
           </span>
         </div>
       </div>
-      <div className="space-y-2"></div>
+
       <div className="w-full flex flex-col gap-1">
         {!isMobile && prevStep && !application.interviewDate && (
           <button
@@ -154,7 +135,11 @@ export const ApplicationGridItem = ({
         )}
         {!isMobile && nextStep && canMoveToNextStep && (
           <button
-            className="flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700"
+            className={cn(
+              "flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700",
+              nextStep === "Got Offer" &&
+                "bg-green-100/30 text-green-600 border-green-200"
+            )}
             onClick={() => {
               handleMoveApplication(application._id as string, nextStep);
             }}
@@ -162,20 +147,6 @@ export const ApplicationGridItem = ({
             Move to {nextStep}
           </button>
         )}
-        {application.applicationStatus === "Interview Scheduled" &&
-          application.interviewDate &&
-          daysUntilInterview <= 0 && (
-            <button
-              className={cn(
-                "px-2 py-1 rounded bg-green-100/30 text-xs text-green-600 border border-green-200"
-              )}
-              onClick={() => {
-                handleMoveApplication(application._id as string, "Got Offer");
-              }}
-            >
-              Got Offer
-            </button>
-          )}
         {isMobile && (
           <button className="px-2 py-1 rounded bg-green-100/30 text-xs text-green-600 border border-green-200">
             {application.jobLocation}, {application.jobCountry}
@@ -185,9 +156,7 @@ export const ApplicationGridItem = ({
           (application.interviewDate ? (
             <div
               className={cn(
-                "px-2 py-1 rounded bg-purple-100/30 text-xs text-purple-600 border border-purple-200",
-                daysUntilInterview <= 0 &&
-                  "bg-green-100/30 text-green-600  border-green-200"
+                "px-2 py-1 rounded bg-violet-100/30 text-xs text-violet-600 border border-violet-200"
               )}
             >
               {daysUntilInterview > 0
@@ -208,6 +177,28 @@ export const ApplicationGridItem = ({
               Set Date
             </button>
           ))}
+        {!isMobile && (
+          <div className="flex w-full gap-1">
+            <Link
+              href={application.jobPostLink}
+              className="text-gray-400 p-1 z-10 hover:text-blue-500 transition flex-1 flex justify-center rounded border"
+            >
+              <SquareArrowUpRight className="size-4" />
+            </Link>
+            <button
+              className="text-gray-400 p-1 z-10 hover:text-blue-500 transition flex-1 flex justify-center rounded border"
+              onClick={() => {
+                onOpen("application-details", { application });
+              }}
+            >
+              <FileSliders className="size-4" />
+            </button>
+            <UnbookmarkButton
+              className="flex-1 justify-center flex rounded border"
+              applicationId={application._id as string}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

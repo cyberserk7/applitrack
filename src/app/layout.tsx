@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
 import AuthProvider from "@/providers/AuthProvider";
 import { ModalProvider } from "@/providers/ModalProvider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter_Tight({ subsets: ["latin"] });
 
@@ -21,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={cn("", inter.className)}>
-          {children}
-          <Toaster position="bottom-right" />
-          <ModalProvider />
-        </body>
+        <EdgeStoreProvider>
+          <body className={cn("", inter.className)}>
+            {children}
+            <Toaster position="bottom-right" />
+            <ModalProvider />
+          </body>
+        </EdgeStoreProvider>
       </AuthProvider>
     </html>
   );

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import {
+  CheckCircle2,
   FileSliders,
   SquareArrowOutUpRight,
   SquareArrowUpRight,
@@ -128,6 +129,9 @@ export const ApplicationListItem = ({
         <span className="flex-1 text-sm font-medium line-clamp-1">
           {application.jobRole}, {application.companyName}{" "}
         </span>
+        {application.applicationStatus === "Got Offer" && (
+          <CheckCircle2 className="size-5 text-green-500" strokeWidth={2.5} />
+        )}
         {isInterviewScheduled &&
           (application.interviewDate ? (
             <div
@@ -137,8 +141,10 @@ export const ApplicationListItem = ({
                   "bg-green-100/30 text-green-600  border-green-200"
               )}
             >
-              {daysUntilInterview > 0
+              {daysUntilInterview > 1
                 ? `Scheduled in ${daysUntilInterview} days`
+                : daysUntilInterview === 1
+                ? "Scheduled tomorrow"
                 : "Interview done"}
             </div>
           ) : (
@@ -178,7 +184,9 @@ export const ApplicationListItem = ({
           {nextStep && canMoveToNextStep && (
             <button
               className={cn(
-                "flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700"
+                "flex items-center gap-1 text-xs border px-2 py-1 rounded hover:bg-dashboardbgdarker transition hover:text-gray-700",
+                nextStep === "Got Offer" &&
+                  "bg-green-100/30 text-green-600 border-green-200 hover:bg-green-100/30 hover:text-green-600"
               )}
               onClick={() => {
                 handleMoveApplication(application._id as string, nextStep);
@@ -187,20 +195,6 @@ export const ApplicationListItem = ({
               Move to {nextStep}
             </button>
           )}
-          {application.applicationStatus === "Interview Scheduled" &&
-            application.interviewDate &&
-            daysUntilInterview <= 0 && (
-              <button
-                className={cn(
-                  "px-2 py-1 rounded bg-green-100/30 text-xs text-green-600 border border-green-200"
-                )}
-                onClick={() => {
-                  handleMoveApplication(application._id as string, "Got Offer");
-                }}
-              >
-                Got Offer
-              </button>
-            )}
         </div>
         <div className="flex">
           <Link

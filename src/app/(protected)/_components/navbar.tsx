@@ -57,7 +57,7 @@ export const Navbar = () => {
                 "bg-white shadow-sm rounded-sm text-gray-900"
             )}
             onClick={() => {
-              router.replace("/dashboard?view=grid");
+              router.replace(`${pathname}?view=grid`);
             }}
           >
             <Columns2 strokeWidth={1.5} className="size-4" />
@@ -69,7 +69,7 @@ export const Navbar = () => {
                 "bg-white shadow-sm rounded-sm text-gray-900"
             )}
             onClick={() => {
-              router.replace("/dashboard?view=list");
+              router.replace(`${pathname}?view=list`);
             }}
           >
             <ListIcon strokeWidth={2} className="size-4" />

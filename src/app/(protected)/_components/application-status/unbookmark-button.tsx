@@ -9,6 +9,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useApplicationStore } from "@/hooks/use-zustand";
+import { cn } from "@/lib/utils";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import { BookmarkMinus } from "lucide-react";
@@ -16,8 +17,10 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 export const UnbookmarkButton = ({
+  className,
   applicationId,
 }: {
+  className?: string;
   applicationId: string;
 }) => {
   const [open, setOpen] = useState(false);
@@ -51,7 +54,10 @@ export const UnbookmarkButton = ({
   return (
     <>
       <button
-        className="text-gray-400 p-1 z-10 hover:text-red-500 transition"
+        className={cn(
+          "text-gray-400 p-1 z-10 hover:text-red-500 transition",
+          className
+        )}
         onClick={() => setOpen(true)}
       >
         <BookmarkMinus className="size-4" />

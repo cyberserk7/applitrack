@@ -2,7 +2,9 @@
 
 import { AddApplicationModal } from "@/components/modals/add-application-modal";
 import { ApplicationDetailsModal } from "@/components/modals/application-details-modal";
+import { DocumentUploadModal } from "@/components/modals/document-upload-modal";
 import { SetInterviewDateModal } from "@/components/modals/set-interview-date-modal";
+import { SettingsModal } from "@/components/modals/settings-modal";
 import TrashCommandModal from "@/components/modals/trash-command-modal";
 import { useEffect, useState } from "react";
 
@@ -22,6 +24,8 @@ export const ModalProvider = () => {
       <ApplicationDetailsModal />
       <TrashCommandModal />
       <SetInterviewDateModal />
+      <SettingsModal />
+      <DocumentUploadModal />
     </>
   );
 };
