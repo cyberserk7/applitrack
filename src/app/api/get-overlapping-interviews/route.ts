@@ -8,7 +8,7 @@ interface overlappingInterview {
     applications: JobApplication[];
 }
 
-export async function GET() {
+export async function GET(req: Request) {
     await dbConnect();
   try {
     const session = await getServerSession(authOptions);
