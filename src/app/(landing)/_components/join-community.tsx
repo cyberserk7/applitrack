@@ -24,7 +24,7 @@ export const JoinCommunity = () => {
           href={"https://github.com/cyberserk7/applitracker"}
           target={"_blank"}
         >
-          <Button className="group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-neutral-950  font-medium text-neutral-200 duration-500">
+          <Button className="group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-neutral-950  font-medium text-neutral-200 duration-500 mt-5">
             <div className="relative inline-flex -translate-x-0 items-center transition group-hover:translate-x-6">
               <div className="absolute -translate-x-4 opacity-0 transition group-hover:-translate-x-6 group-hover:opacity-100">
                 <svg
