@@ -19,7 +19,7 @@ export const ProductFeatures = () => {
             on your job hunt.
           </span>
           <Button className="w-max" asChild>
-            <Link href={"/sign-up"}>Get Started</Link>
+            <Link href={"/sign-up"}>Explore Feature</Link>
           </Button>
         </div>
         <div className="flex-1">
@@ -47,7 +47,7 @@ export const ProductFeatures = () => {
             can prepare in advance and show up confident and ready to impress.
           </span>
           <Button className="w-max" asChild>
-            <Link href={"/sign-up"}>Get Started</Link>
+            <Link href={"/sign-up"}>Explore Feature</Link>
           </Button>
         </div>
         <div className="flex-1">
@@ -76,7 +76,7 @@ export const ProductFeatures = () => {
             employers.
           </span>
           <Button className="w-max" asChild>
-            <Link href={"/sign-up"}>Get Started</Link>
+            <Link href={"/sign-up"}>Explore Feature</Link>
           </Button>
         </div>
         <div className="flex-1">
