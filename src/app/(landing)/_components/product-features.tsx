@@ -42,9 +42,9 @@ export const ProductFeatures = () => {
             Never Miss an Important Date
           </h2>
           <span className="text-gray-500/80 text-base lg:text-lg">
-            Set interview dates within the app, and we'll send you a reminder
-            email one day before the scheduled interview. This way, you can
-            prepare in advance and show up confident and ready to impress.
+            Set interview dates within the app, and we&apos;ll send you a
+            reminder email one day before the scheduled interview. This way, you
+            can prepare in advance and show up confident and ready to impress.
           </span>
           <Button className="w-max" asChild>
             <Link href={"/sign-up"}>Get Started</Link>

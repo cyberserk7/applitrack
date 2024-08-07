@@ -63,15 +63,15 @@ export const ReminderEmail = ({
             </li>
             <li style={listItem}>Prepare questions for the interviewer</li>
             <li style={listItem}>
-              Test your equipment if it's a virtual interview
+              Test your equipment if it&apos;s a virtual interview
             </li>
             <li style={listItem}>
-              Plan your route if it's an in-person interview
+              Plan your route if it&apos;s an in-person interview
             </li>
-            <li style={listItem}>Get a good night's sleep</li>
+            <li style={listItem}>Get a good night&apos;s sleep</li>
           </ul>
           <Text style={text}>
-            Good luck with your interview! You've got this!
+            Good luck with your interview! You&apos;ve got this!
           </Text>
           <Text style={italicText}>
             This is an automated reminder from AppliTrack. If you believe you
