@@ -26,17 +26,23 @@ export const authOptions: NextAuthOptions = {
                 try {
                     const {email, password} = credentials;
 
+                    console.log("Sending database request")
+
                     const user = await UserModel.findOne({
                         email,
                     })
 
                     if(!user) {
+                        console.log("No user found")
                         return null;
                     }
 
+
                     const passwordMatch = await bcrypt.compare(password, user.password);
 
+
                     if(!passwordMatch) {
+                        console.log("Passwords do not match")
                         return null;
                     }
 
