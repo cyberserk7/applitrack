@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const SearchBar = ({ className }: { className?: string }) => {
@@ -11,6 +11,8 @@ export const SearchBar = ({ className }: { className?: string }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const view = searchParams.get("view");
+  const currentParams = new URLSearchParams(searchParams);
+  const pathname = usePathname();
 
   return (
     <div
@@ -27,9 +29,11 @@ export const SearchBar = ({ className }: { className?: string }) => {
         onChange={(e) => {
           setQuery(e.target.value);
           if (e.target.value.length > 0) {
-            router.push(`?view=${view}&searchQuery=${e.target.value}`);
+            currentParams.set("searchQuery", e.target.value);
+            router.replace(`${pathname}?${currentParams.toString()}`);
           } else {
-            router.push(`?view=${view}`);
+            currentParams.delete("searchQuery");
+            router.replace(`${pathname}?${currentParams.toString()}`);
           }
         }}
       />

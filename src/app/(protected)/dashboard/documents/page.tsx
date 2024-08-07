@@ -1,7 +1,6 @@
 "use client";
 
 import { Suspense } from "react";
-import { DocumentType } from "@/models/Document";
 import { DocumentSection } from "./_components/document-section";
 import { useDocumentStore } from "@/hooks/use-zustand";
 

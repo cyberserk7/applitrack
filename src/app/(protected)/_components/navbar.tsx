@@ -5,9 +5,10 @@ import { useModalStore } from "@/hooks/use-zustand";
 import { cn } from "@/lib/utils";
 import { Columns2, ListFilter, ListIcon, Plus } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { MobileNavbarComponent } from "./mobile-navbar-component";
+import { FilterButton } from "./filter-button";
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -16,28 +17,21 @@ export const Navbar = () => {
   const router = useRouter();
   const { onOpen } = useModalStore();
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const currentParams = new URLSearchParams(searchParams);
 
   useEffect(() => {
     if (!paramsView || (paramsView !== "grid" && paramsView !== "list")) {
-      router.push("?view=list");
+      currentParams.set("view", "list");
+      router.replace(`${pathname}?${currentParams.toString()}`);
     }
   }, [paramsView, pathname]);
 
   return (
     <div className="w-full px-3 xl:px-10 py-2 xl:py-3 border-b flex justify-between items-center">
       <div className="flex items-center gap-5">
-        {!isMobile ? (
-          <Button
-            size={"sm"}
-            variant="ghost"
-            className="border text-gray-500  font-normal px-2.5 shadow-sm"
-          >
-            <ListFilter className="mr-2 size-4" />
-            Filter
-          </Button>
-        ) : (
-          <MobileNavbarComponent />
-        )}
+        <Suspense>
+          {!isMobile ? <FilterButton /> : <MobileNavbarComponent />}
+        </Suspense>
       </div>
       <div className="flex items-center gap-2 h-full">
         <Button
@@ -57,7 +51,8 @@ export const Navbar = () => {
                 "bg-white shadow-sm rounded-sm text-gray-900"
             )}
             onClick={() => {
-              router.replace(`${pathname}?view=grid`);
+              currentParams.set("view", "grid");
+              router.replace(`${pathname}?${currentParams.toString()}`);
             }}
           >
             <Columns2 strokeWidth={1.5} className="size-4" />
@@ -69,15 +64,13 @@ export const Navbar = () => {
                 "bg-white shadow-sm rounded-sm text-gray-900"
             )}
             onClick={() => {
-              router.replace(`${pathname}?view=list`);
+              currentParams.set("view", "list");
+              router.replace(`${pathname}?${currentParams.toString()}`);
             }}
           >
             <ListIcon strokeWidth={2} className="size-4" />
           </button>
         </div>
-        {/* <button className="hidden md:block p-2">
-          <SlidersHorizontal className="size-4 text-gray-700" />
-        </button> */}
       </div>
     </div>
   );
