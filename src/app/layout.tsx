@@ -11,7 +11,8 @@ const inter = Inter_Tight({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AppliTrack",
-  description: "The all-in-one tool for tracking your job applications",
+  description:
+    "Track applications, organize your documents, and find new oppurtunities — all in one place.",
 };
 
 export default function RootLayout({
