@@ -15,8 +15,8 @@ export const addApplicationSchema = z.object({
   jobRole: z.string().min(1),
   companyName: z.string().min(1),
   salary: z.coerce.number(),
-  jobCountry: z.string().min(1),
-  jobLocation: z.string().min(1),
+  jobCountry: z.string().optional(),
+  jobLocation: z.string().optional(),
   workType: z.enum(["Onsite", "Remote"]),
   applicationStatus: z.enum(["Bookmarked", "Applied"]),
 });

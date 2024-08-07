@@ -144,12 +144,14 @@ export const ApplicationDetailsModal = () => {
                 {application?.workType === "Onsite" ? "In Person" : "Remote"}
               </span>{" "}
             </h2>
-            <h2 className="text-gray-500">
-              Company Location:{" "}
-              <span className="text-gray-700 font-medium">
-                {application?.jobLocation}, {application?.jobCountry}
-              </span>{" "}
-            </h2>
+            {application?.workType === "Onsite" && (
+              <h2 className="text-gray-500">
+                Company Location:{" "}
+                <span className="text-gray-700 font-medium">
+                  {application?.jobLocation}, {application?.jobCountry}
+                </span>{" "}
+              </h2>
+            )}
             {application?.applicationStatus === "Interview Scheduled" && (
               <h2 className="text-gray-500">
                 Interview Date:{" "}

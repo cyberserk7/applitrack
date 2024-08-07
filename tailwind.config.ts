@@ -101,7 +101,14 @@ const config = {
             transform: "translate(calc(100cqw - 100%), 0)",
           },
         },
-
+        meteor: {
+          "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": {
+            transform: "rotate(215deg) translateX(-500px)",
+            opacity: "0",
+          },
+        },
 
       },
       animation: {
@@ -111,6 +118,7 @@ const config = {
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
         slide: "slide var(--speed) ease-in-out infinite alternate",
         "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
+        meteor: "meteor 5s linear infinite",
       },
     },
   },

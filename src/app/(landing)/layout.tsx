@@ -1,6 +1,7 @@
 import GridPattern from "@/components/magicui/grid-pattern";
 import { cn } from "@/lib/utils";
 import { LandingNavbar } from "./_components/landing-navbar";
+import { LandingFooter } from "./_components/landing-footer";
 
 export default function LandingLayout({
   children,
@@ -20,6 +21,7 @@ export default function LandingLayout({
           "[mask-image:linear-gradient(to_bottom,white,transparent,transparent)] -z-10"
         )}
       />
+      <LandingFooter />
     </div>
   );
 }

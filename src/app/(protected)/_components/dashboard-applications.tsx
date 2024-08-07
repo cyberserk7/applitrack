@@ -22,6 +22,7 @@ export const DashboardApplications = ({
   const view = searchParams.get("view");
   const searchQuery = searchParams.get("searchQuery");
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const filterQuery = searchParams.get("filterQuery");
 
   let applications: JobApplication[] = app;
 
@@ -35,7 +36,13 @@ export const DashboardApplications = ({
     );
   }
 
-  if (searchQuery && applications.length === 0) {
+  if (filterQuery) {
+    applications = applications.filter((app: JobApplication) =>
+      app.applicationStatus.toLowerCase().includes(filterQuery.toLowerCase())
+    );
+  }
+
+  if ((searchQuery || filterQuery) && applications.length === 0) {
     return (
       <div className=" w-full flex items-center justify-center h-40">
         <span className="text-gray-400">No results found</span>
@@ -52,7 +59,7 @@ export const DashboardApplications = ({
         applications={applications}
         view={view!}
         isMobile={isMobile}
-        filter={searchQuery ? true : false}
+        filter={searchQuery || filterQuery ? true : false}
       />
       <ApplicationGroup
         status="Applied"
@@ -61,7 +68,7 @@ export const DashboardApplications = ({
         applications={applications}
         view={view!}
         isMobile={isMobile}
-        filter={searchQuery ? true : false}
+        filter={searchQuery || filterQuery ? true : false}
       />
       <ApplicationGroup
         status="Interview Scheduled"
@@ -70,7 +77,7 @@ export const DashboardApplications = ({
         applications={applications}
         view={view!}
         isMobile={isMobile}
-        filter={searchQuery ? true : false}
+        filter={searchQuery || filterQuery ? true : false}
       />
       <ApplicationGroup
         status="Got Offer"
@@ -79,7 +86,7 @@ export const DashboardApplications = ({
         applications={applications}
         view={view!}
         isMobile={isMobile}
-        filter={searchQuery ? true : false}
+        filter={searchQuery || filterQuery ? true : false}
       />
     </div>
   );

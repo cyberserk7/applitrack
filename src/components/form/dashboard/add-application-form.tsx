@@ -39,6 +39,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const { onClose } = useModalStore();
+  const [isRemote, setIsRemote] = useState(false);
   const { refreshApplications, refreshOverlappingInterviews } =
     useApplicationStore();
 
@@ -47,12 +48,12 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
     defaultValues: {
       jobRole: "",
       companyName: "",
-      salary: 0,
-      jobCountry: "",
-      jobLocation: "",
+      salary: undefined,
+      jobCountry: undefined,
+      jobLocation: undefined,
       workType: "Onsite",
       //@ts-ignore
-      applicationStatus: status || "Bookmarked",
+      applicationStatus: status || undefined,
       jobPostLink: "",
     },
   });
@@ -155,48 +156,6 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
               </FormItem>
             )}
           />
-          <div className="flex gap-2 items-center">
-            <div className="flex-1">
-              <FormField
-                control={form.control}
-                name="jobLocation"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Location</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Hyderabad"
-                        type="text"
-                        className="w-full"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="flex-1">
-              <FormField
-                control={form.control}
-                name="jobCountry"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Country</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="India"
-                        type="text"
-                        className="w-full"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
           <FormField
             control={form.control}
             name="workType"
@@ -204,7 +163,17 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
               <FormItem>
                 <FormLabel>Work Type</FormLabel>
                 <FormControl>
-                  <Select value={field.value} onValueChange={field.onChange}>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    onOpenChange={() => {
+                      if (field.value === "Remote") {
+                        setIsRemote(true);
+                      } else {
+                        setIsRemote(false);
+                      }
+                    }}
+                  >
                     <SelectTrigger className="w-full ">
                       <SelectValue placeholder="Select Type" className="" />
                     </SelectTrigger>
@@ -221,6 +190,51 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
               </FormItem>
             )}
           />
+          {!isRemote && (
+            <div className="flex gap-2 items-center">
+              <div className="flex-1">
+                <FormField
+                  control={form.control}
+                  name="jobLocation"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Location</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Hyderabad"
+                          type="text"
+                          className="w-full"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="flex-1">
+                <FormField
+                  control={form.control}
+                  name="jobCountry"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Country</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="India"
+                          type="text"
+                          className="w-full"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+          )}
+
           <FormField
             control={form.control}
             name="applicationStatus"

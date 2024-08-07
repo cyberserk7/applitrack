@@ -53,11 +53,13 @@ const JobApplicationSchema = new Schema<JobApplication>({
     },
     jobCountry: {
         type: String,
-        required: [true, "Job country is required"],
+        required: false,
+        default: null
     },
     jobLocation: {
         type: String,
-        required: [true, "Job location is required"],
+        required: false,
+        default: null
     },
     workType: {
         type: String,
