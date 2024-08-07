@@ -18,7 +18,7 @@ export const AddApplicationModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="-translate-y-[50%]">
         <DialogHeader>
           <DialogTitle>Add Application</DialogTitle>
           <DialogDescription>

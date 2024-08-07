@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useModalStore } from "@/hooks/use-zustand";
+import { useDocumentStore, useModalStore } from "@/hooks/use-zustand";
 import { useEdgeStore } from "@/lib/edgestore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -31,7 +31,7 @@ export const DocumentUploadForm = ({ type }: { type: string }) => {
   const [loading, setLoading] = useState(false);
   const { edgestore } = useEdgeStore();
   const { onClose } = useModalStore();
-
+  const { refreshDocuments } = useDocumentStore();
   const form = useForm<z.infer<typeof documentFormSchema>>({
     resolver: zodResolver(documentFormSchema),
     defaultValues: {
@@ -51,6 +51,7 @@ export const DocumentUploadForm = ({ type }: { type: string }) => {
       const res = await axios.post("/api/upload-document", fileData);
       if (res.status === 200) {
         toast.success("Document uploaded successfully");
+        refreshDocuments();
         onClose();
       }
     } catch (error) {

@@ -5,7 +5,9 @@ import { ApplicationDetailsModal } from "@/components/modals/application-details
 import { DocumentUploadModal } from "@/components/modals/document-upload-modal";
 import { SetInterviewDateModal } from "@/components/modals/set-interview-date-modal";
 import { SettingsModal } from "@/components/modals/settings-modal";
+import { SupportModal } from "@/components/modals/support-modal";
 import TrashCommandModal from "@/components/modals/trash-command-modal";
+import { ViewDocumentModal } from "@/components/modals/view-document-modal";
 import { useEffect, useState } from "react";
 
 export const ModalProvider = () => {
@@ -26,6 +28,8 @@ export const ModalProvider = () => {
       <SetInterviewDateModal />
       <SettingsModal />
       <DocumentUploadModal />
+      <ViewDocumentModal />
+      <SupportModal />
     </>
   );
 };

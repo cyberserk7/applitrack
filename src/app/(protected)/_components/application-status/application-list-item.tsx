@@ -130,7 +130,7 @@ export const ApplicationListItem = ({
           {application.jobRole}, {application.companyName}{" "}
         </span>
         {application.applicationStatus === "Got Offer" && (
-          <CheckCircle2 className="size-5 text-green-500" strokeWidth={2.5} />
+          <CheckCircle2 className="size-4 text-green-500" strokeWidth={2.5} />
         )}
         {isInterviewScheduled &&
           (application.interviewDate ? (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useApplicationStore } from "@/hooks/use-zustand";
+import { useApplicationStore, useDocumentStore } from "@/hooks/use-zustand";
 import { useEffect } from "react";
 
 export const ApplicationProvider = ({
@@ -11,9 +11,12 @@ export const ApplicationProvider = ({
   const { fetchApplications, refreshOverlappingInterviews } =
     useApplicationStore();
 
+  const { fetchDocuments } = useDocumentStore();
+
   useEffect(() => {
     fetchApplications();
     refreshOverlappingInterviews();
+    fetchDocuments();
   }, []);
 
   return <>{children}</>;

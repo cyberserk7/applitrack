@@ -1,33 +1,17 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import axios from "axios";
+import { Suspense } from "react";
 import { DocumentType } from "@/models/Document";
 import { DocumentSection } from "./_components/document-section";
+import { useDocumentStore } from "@/hooks/use-zustand";
 
 export default function DocumentsPage() {
-  const [documents, setDocuments] = useState<DocumentType[]>([]);
-
-  useEffect(() => {
-    const fetchDocuments = async () => {
-      try {
-        const res = await axios.get("/api/get-documents");
-        if (res.status === 200) {
-          setDocuments(res.data.documents);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDocuments();
-  }, []);
-
-  console.log(documents);
+  const { documents, loading } = useDocumentStore();
 
   return (
     <div className="h-full p-3 xl:p-10 space-y-5 w-full">
       <Suspense>
-        <DocumentSection documents={documents} />
+        <DocumentSection documents={documents} loading={loading} />
       </Suspense>
     </div>
   );

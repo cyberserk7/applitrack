@@ -1,7 +1,8 @@
+import { DocumentType } from "@/models/Document";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import { create } from "zustand";
-export type ModalType = "new-application" | "trash" | "feedback" | "settings" | "search" | "support" | "edit-application" | "application-details" | "set-interview-date" | "document-upload"
+export type ModalType = "new-application" | "trash" | "feedback" | "settings" | "search" | "support" | "edit-application" | "application-details" | "set-interview-date" | "document-upload" | "view-document"
 
 interface ModalData {
     application?: JobApplication;
@@ -9,6 +10,7 @@ interface ModalData {
     applications?: JobApplication[];
     applicationId?: string;
     documentType?: string;
+    document?: DocumentType;
 }
 
 interface ModalStore {
@@ -95,4 +97,43 @@ export const useApplicationStore = create<ApplicationStoreProps>((set) => ({
         }  
     }
 
+}));
+
+interface DocumentStoreProps {
+    documents: DocumentType[];
+    loading: boolean;
+    fetchDocuments: () => Promise<void>;
+    setDocuments: (documents: DocumentType[]) => void;
+    refreshDocuments: () => Promise<void>;
+}
+
+export const useDocumentStore = create<DocumentStoreProps>((set) => ({
+    documents: [],
+    loading: false,
+    fetchDocuments: async () => {
+        set({ loading: true });
+        try {
+            const response = await axios.get(`/api/get-documents`);
+            if(response.data.success) {
+                set({ documents: response.data.documents });
+            }
+        } catch (error) {
+            console.error('Failed to fetch documents', error);
+        } finally {
+            set({ loading: false });
+        }
+    },
+    setDocuments: (documents: DocumentType[]) => {
+        set({ documents: documents }); 
+    },
+    refreshDocuments: async () => {
+        try {
+            const response = await axios.get(`/api/get-documents`);
+            if(response.data.success) {
+                set({ documents: response.data.documents });
+            }
+        } catch (error) {
+            console.error('Failed to fetch documents', error);
+        }
+    }, 
 }));

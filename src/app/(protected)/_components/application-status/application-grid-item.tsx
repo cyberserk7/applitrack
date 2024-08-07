@@ -2,7 +2,7 @@ import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
 import { cn } from "@/lib/utils";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
-import { FileSliders, SquareArrowUpRight } from "lucide-react";
+import { CheckCircle2, FileSliders, SquareArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
@@ -119,6 +119,9 @@ export const ApplicationGridItem = ({
           >
             {application.workType === "Remote" ? "Remote" : "In Person"}
           </span>
+          {application.applicationStatus === "Got Offer" && (
+            <CheckCircle2 className="size-5 text-green-500" strokeWidth={2.5} />
+          )}
         </div>
       </div>
 

@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
 import { ListItemDropdown } from "./list-item-dropdown";
 import { ApplicationGridItem } from "./application-grid-item";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const ApplicationGroup = ({
   status,
@@ -54,7 +55,7 @@ export const ApplicationGroup = ({
             </small>
           </div>
           {showOverlappingInterviewsAlert && (
-            <div className="rounded border flex items-center justify-center gap-1 h-5 w-fit aspect-square md:aspect-auto md:px-2  text-red-500 bg-red-100/30 border-red-200 font-normal">
+            <div className="rounded border flex items-center justify-center gap-1 h-5 w-fit aspect-square md:aspect-auto md:px-2 text-red-500 bg-red-100/30 border-red-200 font-normal">
               <Info className="size-3" />
               <small className="hidden md:block">
                 Some interviews have the same date
@@ -79,9 +80,15 @@ export const ApplicationGroup = ({
       </div>
       {view === "grid" ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-5">
-          {applications.length === 0 ? (
+          {loading && (
+            <div className="aspect-square h-fit rounded-lg">
+              <Skeleton className="w-full h-full bg-dashboardbgdarker"></Skeleton>
+            </div>
+          )}
+          {!loading && applications.length === 0 ? (
             <div className="aspect-square h-fit border rounded-lg border-dashed border-gray-300"></div>
           ) : (
+            !loading &&
             applications.map((application, index) => (
               <ApplicationGridItem key={index} application={application} />
             ))
@@ -91,9 +98,15 @@ export const ApplicationGroup = ({
         <div
           className={cn("flex flex-col w-full", applications.length > 0 && "")}
         >
-          {applications.length === 0 ? (
+          {loading && (
+            <div className="rounded-lg h-11 w-full">
+              <Skeleton className="w-full h-full bg-dashboardbgdarker"></Skeleton>
+            </div>
+          )}
+          {!loading && applications.length === 0 ? (
             <div className="border border-dashed border-gray-300 rounded-lg h-11"></div>
           ) : (
+            !loading &&
             applications.map((application, index) => (
               <ApplicationListItem
                 key={index}

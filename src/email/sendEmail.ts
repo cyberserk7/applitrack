@@ -3,6 +3,7 @@ import VerificationEmail from "./VerificationEmail";
 import OTPEmail from "./OTPEmail";
 import { JobApplication } from "@/models/User";
 import ReminderEmail from "./ReminderEmail";
+import SupportEmail from "./SupportEmail";
 
 interface APIResponse  {
     success: boolean,
@@ -68,6 +69,29 @@ export async function SendReminderEmail({email, app, name}: {
             to: email,
             subject: 'AppliTrack | Interview Reminder',
             react: ReminderEmail({name: name, companyName: app.companyName, jobTitle: app.jobRole, interviewDate: app.interviewDate})
+        })
+        return {    
+            success: true,
+            message: "Email sent"
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            success: false,
+            message: "Error sending email"
+        }
+    }
+}
+
+export async function SendSupportEmail({email, text} : {
+    email: string, text: string
+}): Promise<APIResponse> {
+    try {
+        await resend.emails.send({
+            from: 'onboarding@resend.dev',
+            to: "deynilabjo@gmail.com",
+            subject: `Support Request | ${email}`,
+            react: SupportEmail({message: text, email: email})
         })
         return {    
             success: true,
