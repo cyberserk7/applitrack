@@ -17,6 +17,7 @@ export const ApplicationGroup = ({
   applications: app,
   view,
   isMobile,
+  filter,
 }: {
   status: "Bookmarked" | "Applied" | "Interview Scheduled" | "Got Offer";
   icon: LucideIcon;
@@ -24,6 +25,7 @@ export const ApplicationGroup = ({
   applications: JobApplication[];
   view: string;
   isMobile: boolean;
+  filter: boolean;
 }) => {
   const applications = app
     .filter(
@@ -39,87 +41,96 @@ export const ApplicationGroup = ({
   const showOverlappingInterviewsAlert =
     overlappingInterviews.length > 0 && status === "Interview Scheduled";
 
+  const canShowGroup = (filter && applications.length > 0) || !filter;
+
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3 font-medium text-sm text-gray-700">
-          <Icon className="size-4" strokeWidth={2.5} />
-          {status}
-          <div className="rounded border h-5 w-5 aspect-square  flex items-center justify-center">
-            <small className="text-gray-400">
-              {loading ? (
-                <Loader2 className="size-3 animate-spin" />
-              ) : (
-                applications.length
+    <>
+      {canShowGroup && (
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 font-medium text-sm text-gray-700">
+              <Icon className="size-4" strokeWidth={2.5} />
+              {status}
+              <div className="rounded border h-5 w-5 aspect-square  flex items-center justify-center">
+                <small className="text-gray-400">
+                  {loading ? (
+                    <Loader2 className="size-3 animate-spin" />
+                  ) : (
+                    applications.length
+                  )}
+                </small>
+              </div>
+              {showOverlappingInterviewsAlert && (
+                <div className="rounded border flex items-center justify-center gap-1 h-5 w-fit aspect-square md:aspect-auto md:px-2 text-red-500 bg-red-100/30 border-red-200 font-normal">
+                  <Info className="size-3" />
+                  <small className="hidden md:block">
+                    Some interviews have the same date
+                  </small>{" "}
+                </div>
               )}
-            </small>
+            </div>
+            <div className="flex items-center text-gray-500">
+              {showAddButton && (
+                <Button
+                  size={"sm"}
+                  variant={"ghost"}
+                  onClick={() => {
+                    onOpen("new-application", { applicationStatus: status });
+                  }}
+                >
+                  <Plus className="size-4" />
+                </Button>
+              )}
+              <ListItemDropdown status={status} />
+            </div>
           </div>
-          {showOverlappingInterviewsAlert && (
-            <div className="rounded border flex items-center justify-center gap-1 h-5 w-fit aspect-square md:aspect-auto md:px-2 text-red-500 bg-red-100/30 border-red-200 font-normal">
-              <Info className="size-3" />
-              <small className="hidden md:block">
-                Some interviews have the same date
-              </small>{" "}
+          {view === "grid" ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-5">
+              {loading && (
+                <div className="aspect-square h-fit rounded-lg">
+                  <Skeleton className="w-full h-full bg-dashboardbgdarker"></Skeleton>
+                </div>
+              )}
+              {!loading && applications.length === 0 ? (
+                <div className="aspect-square h-fit border rounded-lg border-dashed border-gray-300"></div>
+              ) : (
+                !loading &&
+                applications.map((application, index) => (
+                  <ApplicationGridItem key={index} application={application} />
+                ))
+              )}
             </div>
-          )}
-        </div>
-        <div className="flex items-center text-gray-500">
-          {showAddButton && (
-            <Button
-              size={"sm"}
-              variant={"ghost"}
-              onClick={() => {
-                onOpen("new-application", { applicationStatus: status });
-              }}
+          ) : (
+            <div
+              className={cn(
+                "flex flex-col w-full",
+                applications.length > 0 && ""
+              )}
             >
-              <Plus className="size-4" />
-            </Button>
-          )}
-          <ListItemDropdown status={status} />
-        </div>
-      </div>
-      {view === "grid" ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 md:gap-5">
-          {loading && (
-            <div className="aspect-square h-fit rounded-lg">
-              <Skeleton className="w-full h-full bg-dashboardbgdarker"></Skeleton>
+              {loading && (
+                <div className="rounded-lg h-11 w-full">
+                  <Skeleton className="w-full h-full bg-dashboardbgdarker"></Skeleton>
+                </div>
+              )}
+              {!loading && applications.length === 0 ? (
+                <div className="border border-dashed border-gray-300 rounded-lg h-11"></div>
+              ) : (
+                !loading &&
+                applications.map((application, index) => (
+                  <ApplicationListItem
+                    key={index}
+                    application={application}
+                    isLastItem={index === applications.length - 1}
+                    isFirstItem={index === 0}
+                    index={index}
+                    isMobile={isMobile}
+                  />
+                ))
+              )}
             </div>
-          )}
-          {!loading && applications.length === 0 ? (
-            <div className="aspect-square h-fit border rounded-lg border-dashed border-gray-300"></div>
-          ) : (
-            !loading &&
-            applications.map((application, index) => (
-              <ApplicationGridItem key={index} application={application} />
-            ))
-          )}
-        </div>
-      ) : (
-        <div
-          className={cn("flex flex-col w-full", applications.length > 0 && "")}
-        >
-          {loading && (
-            <div className="rounded-lg h-11 w-full">
-              <Skeleton className="w-full h-full bg-dashboardbgdarker"></Skeleton>
-            </div>
-          )}
-          {!loading && applications.length === 0 ? (
-            <div className="border border-dashed border-gray-300 rounded-lg h-11"></div>
-          ) : (
-            !loading &&
-            applications.map((application, index) => (
-              <ApplicationListItem
-                key={index}
-                application={application}
-                isLastItem={index === applications.length - 1}
-                isFirstItem={index === 0}
-                index={index}
-                isMobile={isMobile}
-              />
-            ))
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };

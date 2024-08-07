@@ -18,9 +18,16 @@ export const DocumentSection = ({
   const view = searchParams.get("view");
 
   if (searchQuery) {
-    documents = documents.filter(
-      (doc: DocumentType) =>
-        doc.title.toLowerCase() === searchQuery.toLowerCase()
+    documents = documents.filter((doc: DocumentType) =>
+      doc.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
+
+  if (searchQuery && documents.length === 0) {
+    return (
+      <div className=" w-full flex items-center justify-center h-40">
+        <span className="text-gray-400">No results found</span>
+      </div>
     );
   }
 
@@ -33,6 +40,7 @@ export const DocumentSection = ({
         documents={documents}
         loading={loading}
         view={view!}
+        filter={searchQuery ? true : false}
       />
 
       <DocumentGroup
@@ -42,6 +50,7 @@ export const DocumentSection = ({
         documents={documents}
         loading={loading}
         view={view!}
+        filter={searchQuery ? true : false}
       />
     </>
   );

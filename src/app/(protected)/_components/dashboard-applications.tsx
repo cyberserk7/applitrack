@@ -35,6 +35,14 @@ export const DashboardApplications = ({
     );
   }
 
+  if (searchQuery && applications.length === 0) {
+    return (
+      <div className=" w-full flex items-center justify-center h-40">
+        <span className="text-gray-400">No results found</span>
+      </div>
+    );
+  }
+
   return (
     <div className="h-full p-3 xl:p-10 space-y-5 w-full">
       <ApplicationGroup
@@ -44,6 +52,7 @@ export const DashboardApplications = ({
         applications={applications}
         view={view!}
         isMobile={isMobile}
+        filter={searchQuery ? true : false}
       />
       <ApplicationGroup
         status="Applied"
@@ -52,6 +61,7 @@ export const DashboardApplications = ({
         applications={applications}
         view={view!}
         isMobile={isMobile}
+        filter={searchQuery ? true : false}
       />
       <ApplicationGroup
         status="Interview Scheduled"
@@ -60,6 +70,7 @@ export const DashboardApplications = ({
         applications={applications}
         view={view!}
         isMobile={isMobile}
+        filter={searchQuery ? true : false}
       />
       <ApplicationGroup
         status="Got Offer"
@@ -68,6 +79,7 @@ export const DashboardApplications = ({
         applications={applications}
         view={view!}
         isMobile={isMobile}
+        filter={searchQuery ? true : false}
       />
     </div>
   );
