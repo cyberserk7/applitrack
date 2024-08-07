@@ -1,5 +1,6 @@
 import ShinyButton from "@/components/magicui/shiny-button";
 import { Button } from "@/components/ui/button";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export const ProductFeatures = () => {
@@ -18,8 +19,11 @@ export const ProductFeatures = () => {
             with each potential employer, helping you stay organized and focused
             on your job hunt.
           </span>
-          <Button className="w-max" asChild>
-            <Link href={"/sign-up"}>Explore Feature</Link>
+          <Button className="w-max font-normal group" asChild>
+            <Link href={"/sign-up"}>
+              Explore{" "}
+              <ChevronRight className="ml-2 size-4 group-hover:translate-x-1 transition" />
+            </Link>
           </Button>
         </div>
         <div className="flex-1">
@@ -46,8 +50,11 @@ export const ProductFeatures = () => {
             reminder email one day before the scheduled interview. This way, you
             can prepare in advance and show up confident and ready to impress.
           </span>
-          <Button className="w-max" asChild>
-            <Link href={"/sign-up"}>Explore Feature</Link>
+          <Button className="w-max font-normal group" asChild>
+            <Link href={"/sign-up"}>
+              Explore{" "}
+              <ChevronRight className="ml-2 size-4 group-hover:translate-x-1 transition" />
+            </Link>
           </Button>
         </div>
         <div className="flex-1">
@@ -75,8 +82,11 @@ export const ProductFeatures = () => {
             ensuring you always send the right information to potential
             employers.
           </span>
-          <Button className="w-max" asChild>
-            <Link href={"/sign-up"}>Explore Feature</Link>
+          <Button className="w-max font-normal group" asChild>
+            <Link href={"/sign-up"}>
+              Explore{" "}
+              <ChevronRight className="ml-2 size-4 group-hover:translate-x-1 transition" />
+            </Link>
           </Button>
         </div>
         <div className="flex-1">
