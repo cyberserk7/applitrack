@@ -126,7 +126,7 @@ export function SetInterviewDateForm({
                 </FormControl>
                 <label
                   htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                 >
                   Send reminder email a day before the interview date
                 </label>

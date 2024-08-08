@@ -19,10 +19,13 @@ import { ErrorMsg } from "./error-msg";
 import { SuccessMsg } from "./success-msg";
 import axios from "axios";
 
-export const SignUpForm = () => {
+export const SignUpForm = ({
+  setEmailSent,
+}: {
+  setEmailSent: (value: boolean) => void;
+}) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -36,12 +39,11 @@ export const SignUpForm = () => {
   const onSubmit = async (values: z.infer<typeof signUpSchema>) => {
     setSubmitting(true);
     setError("");
-    setSuccess("");
     try {
       const res = await axios.post("/api/sign-up", values);
       if (res.data.success) {
-        setSuccess("Email sent");
         form.reset();
+        setEmailSent(true);
       }
     } catch (error) {
       setError("Something went wrong");
@@ -129,9 +131,6 @@ export const SignUpForm = () => {
             />
           </div>
           <div className="mt-10 space-y-2">
-            {success && (
-              <SuccessMsg success="Check your email for verification link" />
-            )}
             {error && <ErrorMsg error={error} />}
             <SubmitButton label="Create Account" isLoading={submitting} />
           </div>
