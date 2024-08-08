@@ -9,7 +9,7 @@ function isWithinNextDay(interviewDate: Date): boolean {
     return hoursDifference <= 24 && hoursDifference > 0;
   }
 
-export async function POST() {
+export async function PATCH(req: Request) {
     await dbConnect();
     try {
         const users = await UserModel.find();
