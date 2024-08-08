@@ -12,7 +12,7 @@ export const JoinCommunity = () => {
         <span className="text-lg lg:text-xl font-semibold text-orange-500">
           Open Source
         </span>
-        <h2 className="text-3xl md:text-3xl xl:text-4xl font-bold">
+        <h2 className="text-2xl md:text-3xl xl:text-4xl font-bold">
           Join the Community and Contribute
         </h2>
         <span className="text-gray-500/80 text-base lg:text-lg">
