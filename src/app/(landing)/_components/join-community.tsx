@@ -1,6 +1,4 @@
 import Globe from "@/components/magicui/globe";
-import Meteors from "@/components/magicui/meteors";
-import ShinyButton from "@/components/magicui/shiny-button";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
