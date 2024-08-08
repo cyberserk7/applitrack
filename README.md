@@ -21,17 +21,12 @@
 ## Tech Stack
 
 - **Frontend**: Next.js, React, Tailwind CSS
-- **Backend**: Node.js, Express
+- **Backend**: Next.js, Mongoose
 - **Database**: MongoDB
-- **Authentication**: JSON Web Tokens (JWT)
+- **Authentication**: NextAuth with JWT Strategy
 - **Deployment**: Vercel
 
 ## Getting Started
-
-### Prerequisites
-
-- Node.js (v14.x or later)
-- MongoDB
 
 ### Installation
 
@@ -39,4 +34,35 @@
 
    ```bash
    git clone https://github.com/cyberserk7/applitrack.git
-  ```
+   
+2. Navigate to the project directory:
+   ```bash
+   cd applitrack
+   
+3. Install the dependencies:
+   ```bash
+   npm i
+
+4. Create .end.local file in the root directory and paste the API Keys:
+   ```base
+   DATABASE_URL= mongodb database url
+   NEXTAUTH_SECRET= random hex code
+   RESEND_API= resend api key
+   EDGE_STORE_ACCESS_KEY= edge store api key
+   EDGE_STORE_SECRET_KEY= edge store secret key
+
+5. Run the development server:
+   ```bash
+   npm run dev
+
+6. Open ```http://localhost:3000``` in your browser to see the application in action.
+
+### Deployment
+AppliTrack can be easily deployed to Vercel. Simply connect your repository and follow the deployment steps on the Vercel dashboard.
+
+### Contributing
+Contributions are welcome! If you have any ideas or suggestions, please open an issue or submit a pull request.
+
+### License
+This project is licensed under the MIT License.
+
