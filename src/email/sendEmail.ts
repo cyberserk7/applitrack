@@ -17,7 +17,7 @@ export async function SendVerificationEmail({email, token, name} : {
     const url = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`
     try {
         await resend.emails.send({
-            from: 'onboarding@applitrack.online',
+            from: 'Nilabjo <onboarding@applitrack.online>',
             to: email,
             subject: 'AppliTrack | Verification Email',
             react: VerificationEmail({ name, url })
@@ -41,7 +41,7 @@ export async function SendOTPEmail({email, code, name} : {
 }): Promise<APIResponse> {
     try {
         await resend.emails.send({
-            from: 'onboarding@applitrack.online',
+            from: 'Nilabjo <onboarding@applitrack.online>',
             to: email,
             subject: 'AppliTrack | Reset Password Email',
             react: OTPEmail({code: code, name: name})
@@ -65,7 +65,7 @@ export async function SendReminderEmail({email, app, name}: {
 }): Promise<APIResponse> {
     try {
         await resend.emails.send({
-            from: 'onboarding@applitrack.online',
+            from: 'Nilabjo <onboarding@applitrack.online>',
             to: email,
             subject: 'AppliTrack | Interview Reminder',
             react: ReminderEmail({name: name, companyName: app.companyName, jobTitle: app.jobRole, interviewDate: app.interviewDate})
@@ -88,7 +88,7 @@ export async function SendSupportEmail({email, text} : {
 }): Promise<APIResponse> {
     try {
         await resend.emails.send({
-            from: 'onboarding@applitrack.online',
+            from: 'Nilabjo <onboarding@applitrack.online>',
             to: "deynilabjo@gmail.com",
             subject: `Support Request | ${email}`,
             react: SupportEmail({message: text, email: email})
