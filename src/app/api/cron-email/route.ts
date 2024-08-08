@@ -25,11 +25,17 @@ export async function GET(req: Request) {
 
             if(applicationsToNotify.length > 0) {
                 await user.save();
+                return Response.json({
+                    message: "Emails sent successfully",
+                    success: true,  
+                }, {
+                    status: 200
+                })
             }
         }
 
         return Response.json({
-            message: "Emails sent successfully",
+            message: "All emails status are up to date",
             success: true,  
         }, {
             status: 200
