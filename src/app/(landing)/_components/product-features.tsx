@@ -32,7 +32,7 @@ export const ProductFeatures = () => {
             autoPlay
             muted
             loop
-            className="rounded-xl w-full"
+            className="rounded-xl w-full shadow-lg border"
           />
         </div>
       </div>
@@ -63,7 +63,7 @@ export const ProductFeatures = () => {
             autoPlay
             muted
             loop
-            className="rounded-xl w-full"
+            className="rounded-xl w-full shadow-lg border"
           />
         </div>
       </div>
@@ -95,7 +95,7 @@ export const ProductFeatures = () => {
             autoPlay
             muted
             loop
-            className="rounded-xl w-full"
+            className="rounded-xl w-full shadow-lg border"
           />
         </div>
       </div>
