@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AppliTrack
+
+**AppliTrack** is a comprehensive job application management tool designed to streamline your job-hunting process. Track your applications, manage your documents, and stay organized all in one place.
+
+## Features
+
+- **Application Tracking**: Easily monitor the status of your job applications with categories like:
+  - **Bookmarked**: Jobs you're interested in but haven't applied to yet.
+  - **Applied**: Applications you've submitted.
+  - **Interview Scheduled**: Jobs where you've secured an interview.
+  - **Got Offer**: Track offers you've received.
+  
+- **Interview Reminders**: Set interview dates and receive email reminders 1 day before your interview.
+
+- **Document Management**: Upload and manage important job-hunting documents, such as:
+  - **CVs**
+  - **Cover Letters**
+  
+- **User-Friendly Interface**: An intuitive UI that makes managing your job search hassle-free.
+
+## Tech Stack
+
+- **Frontend**: Next.js, React, Tailwind CSS
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Authentication**: JSON Web Tokens (JWT)
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (v14.x or later)
+- MongoDB
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```bash
+   git clone https://github.com/cyberserk7/applitrack.git
+  ```
