@@ -29,7 +29,7 @@ export const ProductFeatures = () => {
         </div>
         <div className="flex-1">
           <video
-            src="/videos/track-feature.mp4"
+            src="/videos/track-feature.mkv"
             autoPlay
             muted
             loop
@@ -60,7 +60,7 @@ export const ProductFeatures = () => {
         </div>
         <div className="flex-1">
           <video
-            src="/videos/reminder-feature.mp4"
+            src="/videos/reminder-feature.mkv"
             autoPlay
             muted
             loop
@@ -92,7 +92,7 @@ export const ProductFeatures = () => {
         </div>
         <div className="flex-1">
           <video
-            src="/videos/document-management-feature.mp4"
+            src="/videos/document-management-feature.mkv"
             autoPlay
             muted
             loop
