@@ -46,6 +46,7 @@ export const ProductFeatures = () => {
               muted
               loop
               className="rounded-xl border shadow-lg"
+              poster="/images/applitrack-track-poster.png"
             />
           )}
         </div>
@@ -87,6 +88,7 @@ export const ProductFeatures = () => {
               muted
               loop
               className="rounded-xl border shadow-lg"
+              poster="/images/applitrack-reminder-poster.png"
             />
           )}
         </div>
@@ -129,6 +131,7 @@ export const ProductFeatures = () => {
               muted
               loop
               className="rounded-xl border shadow-lg"
+              poster="/images/applitrack-document-poster.png"
             />
           )}
         </div>

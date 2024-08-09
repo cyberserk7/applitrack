@@ -26,6 +26,7 @@ export const ProductShowcaseVideo = () => {
         muted
         loop
         className="rounded-xl border shadow-lg"
+        poster="/images/applitrack-showcase-poster.png"
       />
     </>
   );
