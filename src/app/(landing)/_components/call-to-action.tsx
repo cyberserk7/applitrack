@@ -19,7 +19,7 @@ export const CallToAction = () => {
           shimmerSize="0.1em"
           shimmerDuration="1.2s"
         >
-          <span className="whitespace-pre-wrap text-center text-sm leading-none font-medium text-white dark:from-white dark:to-slate-900/10 lg:text-xl">
+          <span className="whitespace-pre-wrap text-center  leading-none font-medium text-white dark:from-white dark:to-slate-900/10 lg:text-xl">
             Get started for free
           </span>
           <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition" />
