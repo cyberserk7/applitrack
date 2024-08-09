@@ -37,6 +37,7 @@
     "mongoose": "^8.5.1",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
+    "next-cloudinary": "^6.10.0",
     "pdfjs-dist": "^3.4.120",
     "react": "^18",
     "react-day-picker": "^8.10.1",
