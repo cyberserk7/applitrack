@@ -1,10 +1,13 @@
-import ShinyButton from "@/components/magicui/shiny-button";
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { useMediaQuery } from "usehooks-ts";
 
 export const ProductFeatures = () => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
     <div className="flex flex-col gap-10 md:gap-32 xl w-full mt-20">
       {/* TRACK FUNCTIONALITIES */}
@@ -28,13 +31,23 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <video
-            src="/videos/track-feature.mkv"
-            autoPlay
-            muted
-            loop
-            className="rounded-xl border shadow-lg"
-          />
+          {isMobile ? (
+            <Image
+              src="/images/track-feature.png"
+              height={1000}
+              width={1000}
+              alt="Track Feature"
+              className="rounded-xl border shadow-lg"
+            />
+          ) : (
+            <video
+              src="/videos/track-feature.mkv"
+              autoPlay
+              muted
+              loop
+              className="rounded-xl border shadow-lg"
+            />
+          )}
         </div>
       </div>
       {/* INTERVIEW REMINDERS FUNCTIONALITY */}
@@ -59,13 +72,23 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <video
-            src="/videos/reminder-feature.mkv"
-            autoPlay
-            muted
-            loop
-            className="rounded-xl border shadow-lg"
-          />
+          {isMobile ? (
+            <Image
+              src="/images/reminder-feature.png"
+              height={1000}
+              width={1000}
+              alt="Reminder Feature"
+              className="rounded-xl border shadow-lg"
+            />
+          ) : (
+            <video
+              src="/videos/reminder-feature.mkv"
+              autoPlay
+              muted
+              loop
+              className="rounded-xl border shadow-lg"
+            />
+          )}
         </div>
       </div>
       {/* DOCUMENT MANAGEMENT FUNCTIONALITY */}
@@ -91,13 +114,23 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <video
-            src="/videos/document-management-feature.mkv"
-            autoPlay
-            muted
-            loop
-            className="rounded-xl border shadow-lg"
-          />
+          {isMobile ? (
+            <Image
+              src="/images/manage-document-feature.png"
+              height={1000}
+              width={1000}
+              alt="Document Management Feature"
+              className="rounded-xl border shadow-lg"
+            />
+          ) : (
+            <video
+              src="/videos/document-management-feature.mkv"
+              autoPlay
+              muted
+              loop
+              className="rounded-xl border shadow-lg"
+            />
+          )}
         </div>
       </div>
     </div>
