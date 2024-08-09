@@ -50,7 +50,9 @@ export const SignInForm = () => {
         router.replace("/dashboard");
       } else {
         if (res?.error === "AccessDenied") {
-          setEmailPrompt("Please check your email for verification link");
+          setEmailPrompt(
+            "Your account must be verified first. Please check your registererd email for verification link."
+          );
         } else {
           if (res?.error === "CredentialsSignin") {
             setError("Invalid email or password");
