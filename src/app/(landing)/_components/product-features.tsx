@@ -1,7 +1,9 @@
 import ShinyButton from "@/components/magicui/shiny-button";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export const ProductFeatures = () => {
   return (
@@ -27,13 +29,28 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <video
+          {/* <video
             src="/videos/track-feature.mp4"
             autoPlay
             muted
             loop
             className="rounded-xl w-full shadow-lg border"
-          />
+          /> */}
+          <Suspense
+            fallback={
+              <div className="aspect-video w-full h-fit">
+                <Skeleton className="w-full h-full"></Skeleton>
+              </div>
+            }
+          >
+            <video
+              src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723190794/track-feature_lcpqre.mp4"
+              autoPlay
+              muted
+              loop
+              className="rounded-xl border shadow-lg"
+            />
+          </Suspense>
         </div>
       </div>
       {/* INTERVIEW REMINDERS FUNCTIONALITY */}
@@ -58,13 +75,21 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <video
-            src="/videos/reminder-feature.mp4"
-            autoPlay
-            muted
-            loop
-            className="rounded-xl w-full shadow-lg border"
-          />
+          <Suspense
+            fallback={
+              <div className="aspect-video w-full h-fit">
+                <Skeleton className="w-full h-full"></Skeleton>
+              </div>
+            }
+          >
+            <video
+              src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723190797/reminder-feature_idnbgo.mp4"
+              autoPlay
+              muted
+              loop
+              className="rounded-xl border shadow-lg"
+            />
+          </Suspense>
         </div>
       </div>
       {/* DOCUMENT MANAGEMENT FUNCTIONALITY */}
@@ -90,13 +115,21 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <video
-            src="/videos/document-management-feature.mp4"
-            autoPlay
-            muted
-            loop
-            className="rounded-xl w-full shadow-lg border"
-          />
+          <Suspense
+            fallback={
+              <div className="aspect-video w-full h-fit">
+                <Skeleton className="w-full h-full"></Skeleton>
+              </div>
+            }
+          >
+            <video
+              src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723190788/document-management-feature_zaoali.mp4"
+              autoPlay
+              muted
+              loop
+              className="rounded-xl border shadow-lg"
+            />
+          </Suspense>
         </div>
       </div>
     </div>
