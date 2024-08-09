@@ -3,7 +3,7 @@ import { Github, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export const LandingNavbar = () => {
+export const LandingNavbar = async () => {
   return (
     <nav className=" bg-white border-b border-zinc-300">
       <div className="flex items-center justify-between px-5 py-4 container">
@@ -30,11 +30,11 @@ export const LandingNavbar = () => {
             >
               <div className="relative inline-flex -translate-x-0 items-center transition group-hover:-translate-x-6">
                 <div className="absolute translate-x-0 opacity-100 transition group-hover:-translate-x-6 group-hover:opacity-0">
-                  <Star className="size-4" />
+                  <Star className="size-4" strokeWidth={2.5} />
                 </div>
                 <span className="pl-6">Star on Github</span>
                 <div className="absolute right-0 translate-x-12 opacity-0 transition group-hover:translate-x-6 group-hover:opacity-100 flex items-center gap-1">
-                  <Github className="size-4" />
+                  <Github className="size-4" strokeWidth={2.5} />
                 </div>
               </div>
             </Button>

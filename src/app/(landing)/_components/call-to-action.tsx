@@ -16,10 +16,12 @@ export const CallToAction = () => {
         <ShimmerButton
           className="shadow-2xl mt-5 md:mt-10 flex items-center text-lg"
           background="linear-gradient(to bottom, rgba(197, 48, 48, 1), rgba(221, 107, 32, 1))"
-          shimmerSize="0.1rem"
-          shimmerDuration="1.5s"
+          shimmerSize="0.1em"
+          shimmerDuration="1.2s"
         >
-          Get started for free
+          <span className="whitespace-pre-wrap text-center text-sm leading-none font-medium text-white dark:from-white dark:to-slate-900/10 lg:text-xl">
+            Get started for free
+          </span>
           <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition" />
         </ShimmerButton>
       </Link>
