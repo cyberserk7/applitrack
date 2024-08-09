@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
 
 export const ProductFeatures = () => {
   return (
@@ -29,21 +28,13 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <Suspense
-            fallback={
-              <div className="aspect-video w-full h-fit">
-                <Skeleton className="w-full h-full"></Skeleton>
-              </div>
-            }
-          >
-            <video
-              src="/videos/track-feature.mp4"
-              autoPlay
-              muted
-              loop
-              className="rounded-xl border shadow-lg"
-            />
-          </Suspense>
+          <video
+            src="/videos/track-feature.mp4"
+            autoPlay
+            muted
+            loop
+            className="rounded-xl border shadow-lg"
+          />
         </div>
       </div>
       {/* INTERVIEW REMINDERS FUNCTIONALITY */}
@@ -68,21 +59,13 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <Suspense
-            fallback={
-              <div className="aspect-video w-full h-fit">
-                <Skeleton className="w-full h-full"></Skeleton>
-              </div>
-            }
-          >
-            <video
-              src="/videos/reminder-feature.mp4"
-              autoPlay
-              muted
-              loop
-              className="rounded-xl border shadow-lg"
-            />
-          </Suspense>
+          <video
+            src="/videos/reminder-feature.mp4"
+            autoPlay
+            muted
+            loop
+            className="rounded-xl border shadow-lg"
+          />
         </div>
       </div>
       {/* DOCUMENT MANAGEMENT FUNCTIONALITY */}
@@ -108,21 +91,13 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          <Suspense
-            fallback={
-              <div className="aspect-video w-full h-fit">
-                <Skeleton className="w-full h-full"></Skeleton>
-              </div>
-            }
-          >
-            <video
-              src="/videos/document-management-feature.mp4"
-              autoPlay
-              muted
-              loop
-              className="rounded-xl border shadow-lg"
-            />
-          </Suspense>
+          <video
+            src="/videos/document-management-feature.mp4"
+            autoPlay
+            muted
+            loop
+            className="rounded-xl border shadow-lg"
+          />
         </div>
       </div>
     </div>
