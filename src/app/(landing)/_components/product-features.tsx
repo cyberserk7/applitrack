@@ -29,13 +29,6 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          {/* <video
-            src="/videos/track-feature.mp4"
-            autoPlay
-            muted
-            loop
-            className="rounded-xl w-full shadow-lg border"
-          /> */}
           <Suspense
             fallback={
               <div className="aspect-video w-full h-fit">
@@ -44,7 +37,7 @@ export const ProductFeatures = () => {
             }
           >
             <video
-              src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723190794/track-feature_lcpqre.mp4"
+              src="/videos/track-feature.mp4"
               autoPlay
               muted
               loop
@@ -83,7 +76,7 @@ export const ProductFeatures = () => {
             }
           >
             <video
-              src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723190797/reminder-feature_idnbgo.mp4"
+              src="/videos/reminder-feature.mp4"
               autoPlay
               muted
               loop
@@ -123,7 +116,7 @@ export const ProductFeatures = () => {
             }
           >
             <video
-              src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723190788/document-management-feature_zaoali.mp4"
+              src="/videos/document-management-feature.mp4"
               autoPlay
               muted
               loop

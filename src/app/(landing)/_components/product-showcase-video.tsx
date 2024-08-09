@@ -14,7 +14,7 @@ export const ProductShowcaseVideo = () => {
         }
       >
         <video
-          src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723190798/product-showcase_tkek3s.mp4"
+          src="/videos/product-showcase.mp4"
           autoPlay
           muted
           loop
