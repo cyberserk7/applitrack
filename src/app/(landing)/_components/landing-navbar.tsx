@@ -10,8 +10,8 @@ export const LandingNavbar = async () => {
   return (
     <m.nav
       className="fixed top-0 z-50 bg-white border-b border-zinc-300 w-full"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ y: -20 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
       <div className="flex items-center justify-between px-5 py-4 container">
