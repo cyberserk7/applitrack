@@ -5,11 +5,17 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { useMediaQuery } from "usehooks-ts";
+import { motion as m } from "framer-motion";
 
 export const ProductFeatures = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   return (
-    <div className="flex flex-col gap-10 md:gap-32 xl w-full mt-12 md:mt-20">
+    <m.div
+      className="flex flex-col gap-10 md:gap-32 xl w-full mt-12 md:mt-20"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
+    >
       {/* TRACK FUNCTIONALITIES */}
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col gap-3 w-full lg:max-w-md">
@@ -136,6 +142,6 @@ export const ProductFeatures = () => {
           )}
         </div>
       </div>
-    </div>
+    </m.div>
   );
 };

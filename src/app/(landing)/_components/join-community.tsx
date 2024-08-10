@@ -1,11 +1,19 @@
+"use client";
+
 import Globe from "@/components/magicui/globe";
 import { Button } from "@/components/ui/button";
 import { Github, Star } from "lucide-react";
 import { Link } from "next-view-transitions";
+import { motion as m } from "framer-motion";
 
 export const JoinCommunity = () => {
   return (
-    <div className="w-full flex justify-center items-center py-10 lg:py-20 rounded-xl relative  lg:border overflow-hidden text-center">
+    <m.div
+      className="w-full flex justify-center items-center py-10 lg:py-20 rounded-xl relative  lg:border overflow-hidden text-center"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
+    >
       <div className="flex flex-col gap-2 items-center w-full lg:max-w-2xl z-10">
         <span className="text-lg lg:text-xl font-semibold text-orange-500">
           Open Source
@@ -38,6 +46,6 @@ export const JoinCommunity = () => {
       <div className="hidden lg:block">
         <Globe className="top-36" />
       </div>
-    </div>
+    </m.div>
   );
 };
