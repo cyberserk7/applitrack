@@ -11,7 +11,7 @@ import {
   SquareArrowOutUpRight,
   SquareArrowUpRight,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { toast } from "sonner";
 import { UnbookmarkButton } from "./unbookmark-button";
 

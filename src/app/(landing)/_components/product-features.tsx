@@ -3,13 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useMediaQuery } from "usehooks-ts";
 
 export const ProductFeatures = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   return (
-    <div className="flex flex-col gap-10 md:gap-32 xl w-full mt-20">
+    <div className="flex flex-col gap-10 md:gap-32 xl w-full mt-12 md:mt-20">
       {/* TRACK FUNCTIONALITIES */}
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col gap-3 w-full lg:max-w-md">

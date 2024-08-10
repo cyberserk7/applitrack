@@ -1,10 +1,18 @@
+"use client";
+
 import ShimmerButton from "@/components/magicui/shimmer-button";
 import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
+import { motion as m } from "framer-motion";
 
 export const CallToAction = () => {
   return (
-    <div className="text-center flex flex-col items-center md:items-center">
+    <m.div
+      className="text-center flex flex-col items-center md:items-center"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
+    >
       <h1 className="text-[2rem] md:text-[3rem] lg:text-[3.5rem] xl:text-[3.8rem] font-bold bg-gradient-to-r from-red-600  to-yellow-600 bg-clip-text text-transparent ">
         All-In-One Job Application Manager
       </h1>
@@ -25,6 +33,6 @@ export const CallToAction = () => {
           <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition" />
         </ShimmerButton>
       </Link>
-    </div>
+    </m.div>
   );
 };

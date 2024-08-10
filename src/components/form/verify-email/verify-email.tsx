@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import axios, { AxiosError } from "axios";
 import { AlertCircle, ChevronRight, Loader2 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMediaQuery } from "usehooks-ts";
+import { motion as m } from "framer-motion";
 
 export const ProductShowcaseVideo = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -19,7 +20,11 @@ export const ProductShowcaseVideo = () => {
   }
 
   return (
-    <>
+    <m.div
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
+    >
       <video
         src="/videos/product-showcase.mkv"
         autoPlay
@@ -28,6 +33,6 @@ export const ProductShowcaseVideo = () => {
         className="rounded-xl border shadow-lg"
         poster="/images/applitrack-showcase-poster.png"
       />
-    </>
+    </m.div>
   );
 };

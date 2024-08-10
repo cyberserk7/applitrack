@@ -3,7 +3,7 @@
 import { VerifyEmailChecker } from "@/components/form/verify-email/verify-email";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Suspense, useState } from "react";
 
 export default function VerifyEmail() {

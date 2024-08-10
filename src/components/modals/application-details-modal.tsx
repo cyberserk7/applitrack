@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Button } from "../ui/button";
 import { ArrowLeft, ArrowRight, Link2, Loader2, Trash } from "lucide-react";
 import axios from "axios";

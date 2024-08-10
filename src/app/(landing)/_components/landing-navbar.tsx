@@ -1,11 +1,19 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Github, Star } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
+import { motion as m } from "framer-motion";
 
 export const LandingNavbar = async () => {
   return (
-    <nav className=" bg-white border-b border-zinc-300">
+    <m.nav
+      className="fixed top-0 z-50 bg-white border-b border-zinc-300 w-full"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <div className="flex items-center justify-between px-5 py-4 container">
         <div className="flex items-center gap-5">
           <Link href={"/"} className="flex items-center gap-1">
@@ -48,6 +56,6 @@ export const LandingNavbar = async () => {
           <Link href={"/sign-up"}>Get Started</Link>
         </Button>
       </div>
-    </nav>
+    </m.nav>
   );
 };

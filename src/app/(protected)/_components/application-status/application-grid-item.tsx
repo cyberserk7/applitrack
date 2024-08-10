@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import { CheckCircle2, FileSliders, SquareArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
 import { UnbookmarkButton } from "./unbookmark-button";
