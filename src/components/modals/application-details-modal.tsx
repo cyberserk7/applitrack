@@ -110,54 +110,56 @@ export const ApplicationDetailsModal = () => {
           </DialogDescription>
         </DialogHeader>
         <div className="w-full space-y-5">
-          <Button asChild size={"sm"}>
-            <Link
-              href={application?.jobPostLink!}
-              className="text-xs"
-              target="_blank"
-            >
-              Link to Job Posting <Link2 className="size-4 ml-2" />
-            </Link>
-          </Button>
-          <div className="text-sm">
-            <h2 className="text-gray-500">
-              Role:{" "}
-              <span className="text-gray-700 font-medium">
-                {application?.jobRole}
-              </span>{" "}
-            </h2>
-            <h2 className="text-gray-500">
-              Company:{" "}
-              <span className="text-gray-700 font-medium">
-                {application?.companyName}
-              </span>{" "}
-            </h2>
-            <h2 className="text-gray-500">
-              Salary:{" "}
-              <span className="text-gray-700 font-medium">
-                Rs.{application?.salary} per year
-              </span>{" "}
-            </h2>
-            <h2 className="text-gray-500">
-              Work Type:{" "}
-              <span className="text-gray-700 font-medium">
-                {application?.workType === "Onsite" ? "In Person" : "Remote"}
-              </span>{" "}
-            </h2>
-            {application?.workType === "Onsite" && (
-              <h2 className="text-gray-500">
-                Company Location:{" "}
-                <span className="text-gray-700 font-medium">
-                  {application?.jobLocation}, {application?.jobCountry}
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            <div className="rounded-lg py-2 px-3 border bg-zinc-100/40">
+              <div className="text-gray-700">
+                <span className="font-semibold">Position: </span>
+                <span className="">{application?.jobRole}</span>{" "}
+              </div>
+            </div>
+            <div className="rounded-lg py-2 px-3 border bg-zinc-100/40">
+              <div className="text-gray-700">
+                <span className="font-semibold">Company: </span>
+                <span className="">{application?.companyName}</span>{" "}
+              </div>
+            </div>
+            <div className="rounded-lg py-2 px-3 border bg-zinc-100/40">
+              <div className="text-gray-700">
+                <span className="font-semibold">Salary: </span>
+                <span className="">
+                  Rs.{application?.salary} Per Annum
                 </span>{" "}
-              </h2>
+              </div>
+            </div>
+
+            <div className="rounded-lg py-2 px-3 border bg-zinc-100/40">
+              <div className="text-gray-700">
+                <span className="font-semibold">Work Type: </span>
+                <span className="">
+                  {application?.workType === "Onsite" ? "In Person" : "Remote"}
+                </span>{" "}
+              </div>
+            </div>
+            {application?.workType === "Onsite" && (
+              <div className="rounded-lg py-2 px-3 border bg-zinc-100/40">
+                <div className="text-gray-700">
+                  <span className="font-semibold">Location: </span>
+                  <span className="">
+                    {application?.jobLocation}, {application?.jobCountry}
+                  </span>{" "}
+                </div>
+              </div>
             )}
             {application?.applicationStatus === "Interview Scheduled" && (
-              <h2 className="text-gray-500">
-                Interview Date:{" "}
-                <span className="text-gray-700 font-medium">
+              <div className="rounded-lg py-2 px-3 border bg-zinc-100/40">
+                <div className="text-gray-700">
+                  <span className="font-semibold">Interview Date: </span>
                   {application?.interviewDate ? (
-                    new Date(application?.interviewDate).toLocaleDateString()
+                    <span className="">
+                      {new Date(
+                        application?.interviewDate
+                      ).toLocaleDateString()}
+                    </span>
                   ) : (
                     <button
                       className="px-2 py-1 rounded bg-red-100/30 text-xs text-red-600 border border-red-200"
@@ -170,10 +172,11 @@ export const ApplicationDetailsModal = () => {
                       Set Date
                     </button>
                   )}
-                </span>{" "}
-              </h2>
+                </div>
+              </div>
             )}
           </div>
+
           <div className="space-y-2">
             <div className="flex gap-2 w-full">
               {prevStep && !application?.interviewDate && (

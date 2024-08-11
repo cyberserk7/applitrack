@@ -174,7 +174,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
                       }
                     }}
                   >
-                    <SelectTrigger className="w-full ">
+                    <SelectTrigger className="w-full bg-zinc-50">
                       <SelectValue placeholder="Select Type" className="" />
                     </SelectTrigger>
                     <SelectContent>
@@ -246,7 +246,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
-                    <SelectTrigger className="w-full ">
+                    <SelectTrigger className="w-full  bg-zinc-50">
                       <SelectValue placeholder="Select Status" className="" />
                     </SelectTrigger>
                     <SelectContent>
