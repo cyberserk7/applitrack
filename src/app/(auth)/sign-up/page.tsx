@@ -33,16 +33,6 @@ export default function SignUpPage() {
             Account created successfully. Check your email for verification
             link. Please click on the link to verify your account.
           </span>
-          <Button
-            asChild
-            className="flex items-center gap-2"
-            variant={"outline"}
-          >
-            <Link href={"/sign-in"} className="">
-              Back to Sign In
-              <ArrowRightIcon className="size-4" />
-            </Link>
-          </Button>
         </div>
       )}
     </div>

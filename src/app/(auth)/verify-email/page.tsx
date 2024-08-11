@@ -34,7 +34,7 @@ export default function VerifyEmail() {
             variant={"outline"}
           >
             <Link href={"/sign-in"} className="">
-              Back to Sign In
+              Sign In
               <ArrowRightIcon className="size-4" />
             </Link>
           </Button>
