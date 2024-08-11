@@ -56,20 +56,16 @@ export const ReminderEmail = ({
             <br />
             <strong>Date:</strong> {interviewDate.toDateString()}
           </Text>
-          <Text style={text}>Remember to:</Text>
-          <ul style={list}>
-            <li style={listItem}>
-              Review the job description and your application
-            </li>
-            <li style={listItem}>Prepare questions for the interviewer</li>
-            <li style={listItem}>
-              Test your equipment if it&apos;s a virtual interview
-            </li>
-            <li style={listItem}>
-              Plan your route if it&apos;s an in-person interview
-            </li>
-            <li style={listItem}>Get a good night&apos;s sleep</li>
-          </ul>
+          <Text style={text}>
+            - Review the job description and your application
+            <br />
+            - Prepare questions for the interviewer
+            <br />
+            - Test your equipment if it&apos;s a virtual interview
+            <br />
+            - Plan your route if it&apos;s an in-person interview
+            <br />- Get a good night&apos;s sleep
+          </Text>
           <Text style={text}>
             Good luck with your interview! You&apos;ve got this!
           </Text>
@@ -134,7 +130,7 @@ const list = {
 
 const listItem = {
   fontSize: "16px",
-  lineHeight: "26px",
   marginBottom: "10px",
   listStyleType: "disc",
+  textAlign: "left" as const,
 };

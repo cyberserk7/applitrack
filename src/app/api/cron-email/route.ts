@@ -3,10 +3,13 @@ import dbConnect from "@/lib/db-connect";
 import UserModel, { JobApplication } from "@/models/User";
 
 function isWithinNextDay(interviewDate: Date): boolean {
-    const now = new Date();
+
+    
+    const now = new Date(Date.now());
     const timeDifference = interviewDate.getTime() - now.getTime();
     const hoursDifference = timeDifference / (1000 * 3600);
     return hoursDifference <= 24 && hoursDifference > 0;
+
   }
 
 export async function GET(req: Request) {
