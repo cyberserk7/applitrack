@@ -14,7 +14,7 @@ export const ProductShowcaseVideo = () => {
         autoPlay
         muted
         loop
-        className="rounded-xl border shadow-lg"
+        className="rounded-xl border shadow-lg bg-cover"
         poster="/images/applitrack-showcase-poster.png"
       />
     </m.div>
