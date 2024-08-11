@@ -1,24 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { useMediaQuery } from "usehooks-ts";
 import { motion as m } from "framer-motion";
 
 export const ProductShowcaseVideo = () => {
-  const isMobile = useMediaQuery("(max-width: 768px)");
-
-  if (isMobile) {
-    return (
-      <Image
-        src="/images/product-showcase.png"
-        height={1000}
-        width={1000}
-        alt="Product Showcase"
-        className="rounded-xl border shadow-lg"
-      />
-    );
-  }
-
   return (
     <m.div
       initial={{ opacity: 0, y: -20 }}
@@ -26,7 +10,7 @@ export const ProductShowcaseVideo = () => {
       transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
     >
       <video
-        src="/videos/product-showcase.mkv"
+        src="/videos/product-showcase.mov"
         autoPlay
         muted
         loop

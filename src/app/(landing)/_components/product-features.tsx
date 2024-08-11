@@ -137,7 +137,7 @@ export const ProductFeatures = () => {
               muted
               loop
               className="rounded-xl border shadow-lg"
-              poster="/images/applitrack-document-poster.png"
+              poster="/images/applitrack-document-management-poster.png"
             />
           )}
         </div>
