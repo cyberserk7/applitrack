@@ -10,7 +10,7 @@ export const ProductShowcaseVideo = () => {
       transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
     >
       <video
-        src="/videos/product-showcase.mov"
+        src="/videos/product-showcase1.mp4"
         autoPlay
         muted
         loop
