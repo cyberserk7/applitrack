@@ -23,6 +23,7 @@ export async function POST(req: Request) {
 
         const values = await req.json();
         const res = addApplicationSchema.safeParse(values);
+        console.log(res)
         if(!res.success) {
             return Response.json({
                 success: false,

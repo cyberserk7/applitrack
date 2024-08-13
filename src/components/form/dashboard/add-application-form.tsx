@@ -185,7 +185,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
                     <FormItem className="">
                       <FormControl>
                         <Select
-                          value={salaryNotDisclosed ? undefined : field.value}
+                          value={salaryNotDisclosed ? undefined : field.value!}
                           onValueChange={field.onChange}
                           onOpenChange={() => {
                             if (field.value) {
