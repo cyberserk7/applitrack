@@ -20,7 +20,7 @@ export async function POST(req: Request) {
             })
         }
 
-        const { jobPostLink, jobRole, companyName, salary, jobLocation, jobCountry, workType, applicationStatus, currency } = res.data;
+        const { jobPostLink, jobRole, companyName, salary, jobLocation, jobCountry, workType, currency } = res.data;
 
         const session = await getServerAuthSession();
 
@@ -42,7 +42,6 @@ export async function POST(req: Request) {
         user.jobApplications.find((application: JobApplication) => application._id!.toString() === applicationId).jobLocation = jobLocation;
         user.jobApplications.find((application: JobApplication) => application._id!.toString() === applicationId).jobCountry = jobCountry;
         user.jobApplications.find((application: JobApplication) => application._id!.toString() === applicationId).workType = workType;
-        user.jobApplications.find((application: JobApplication) => application._id!.toString() === applicationId).applicationStatus = applicationStatus;
         user.jobApplications.find((application: JobApplication) => application._id!.toString() === applicationId).currency = currency;
 
         await user.save();

@@ -9,5 +9,4 @@ export const editApplicationSchema = z.object({
     jobCountry: z.string().nullable(),
     jobLocation: z.string().nullable(),
     workType: z.enum(["Onsite", "Remote"]),
-    applicationStatus: z.enum(["Bookmarked", "Applied"]),
 });

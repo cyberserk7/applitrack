@@ -62,8 +62,6 @@ export const EditAppplicationForm = ({
       jobLocation: application && application.jobLocation,
       workType: application && application.workType,
       //@ts-ignore
-      applicationStatus:
-        (application && application.applicationStatus) || undefined,
       jobPostLink: application && application.jobPostLink,
     },
   });
@@ -100,7 +98,7 @@ export const EditAppplicationForm = ({
         refreshApplications();
         refreshOverlappingInterviews();
         onClose();
-        toast.success("Application added successfully");
+        toast.success("Application updated successfully");
       }
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -345,34 +343,6 @@ export const EditAppplicationForm = ({
               </div>
             </div>
           )}
-
-          <FormField
-            control={form.control}
-            name="applicationStatus"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Application Status</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger className="w-full  bg-zinc-50">
-                      <SelectValue placeholder="Select Status" className="" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {applicationStatuses.map((applicationStatus, index) => (
-                        <SelectItem key={index} value={applicationStatus}>
-                          {applicationStatus}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
         <div className="flex flex-col gap-2">
           {error && <ErrorMsg error={error} />}

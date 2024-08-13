@@ -361,7 +361,11 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
         </div>
         <div className="flex flex-col gap-2">
           {error && <ErrorMsg error={error} />}
-          <SubmitButton isLoading={submitting} label="Add Application" />
+          <SubmitButton
+            isLoading={submitting}
+            label="Add Application"
+            className="h-max py-3"
+          />
         </div>
       </form>
     </Form>
