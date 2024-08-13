@@ -17,7 +17,7 @@ import { z } from "zod";
 import { SubmitButton } from "../submit-button";
 import { ErrorMsg } from "./error-msg";
 import { SuccessMsg } from "./success-msg";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export const SignUpForm = ({
   setEmailSent,
@@ -41,12 +41,15 @@ export const SignUpForm = ({
     setError("");
     try {
       const res = await axios.post("/api/sign-up", values);
+      console.log(res);
       if (res.data.success) {
         form.reset();
         setEmailSent(true);
       }
     } catch (error) {
-      setError("Something went wrong");
+      if (error instanceof AxiosError) {
+        setError(error.response?.data.message);
+      }
     } finally {
       setSubmitting(false);
     }

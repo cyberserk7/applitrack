@@ -21,8 +21,10 @@ export async function POST(req: Request) {
     const hashedPassword = await bcrypt.hash(password, 12);
     try {
         const user = await UserModel.findOne({email: email});
+        
         if(user) {
             if(user.isVerified) {
+                
                 return Response.json({
                     success: false,
                     message: "User already exists"
@@ -54,6 +56,7 @@ export async function POST(req: Request) {
                })       
             }
         } else {
+            
             const newUser = await UserModel.create({
                 name,
                 email,

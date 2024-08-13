@@ -30,8 +30,9 @@ export default function SignUpPage() {
       ) : (
         <div className="w-full space-y-5 flex flex-col">
           <span className="text-sm text-green-600">
-            Account created successfully. Check your email for verification
-            link. Please click on the link to verify your account.
+            Check your email for a verification link. If it&apos;s not in your
+            inbox, check your spam folder too. Click the link to verify your
+            account.
           </span>
         </div>
       )}
