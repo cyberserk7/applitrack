@@ -1,14 +1,10 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMediaQuery } from "usehooks-ts";
 import { motion as m } from "framer-motion";
 
 export const ProductFeatures = () => {
-  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
     <m.div
       className="flex flex-col gap-10 md:gap-32 xl w-full mt-12 md:mt-20"
@@ -37,24 +33,14 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          {isMobile ? (
-            <Image
-              src="/images/track-feature.png"
-              height={1000}
-              width={1000}
-              alt="Track Feature"
-              className="rounded-xl border shadow-lg"
-            />
-          ) : (
-            <video
-              src="/videos/track-feature.mkv"
-              autoPlay
-              muted
-              loop
-              className="rounded-xl border shadow-lg"
-              poster="/images/applitrack-track-poster.png"
-            />
-          )}
+          <video
+            src="/videos/track-feature.mp4"
+            autoPlay
+            muted
+            loop
+            className="rounded-xl border shadow-lg"
+            poster="/images/applitrack-track-poster.png"
+          />
         </div>
       </div>
       {/* INTERVIEW REMINDERS FUNCTIONALITY */}
@@ -79,24 +65,14 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          {isMobile ? (
-            <Image
-              src="/images/reminder-feature.png"
-              height={1000}
-              width={1000}
-              alt="Reminder Feature"
-              className="rounded-xl border shadow-lg"
-            />
-          ) : (
-            <video
-              src="/videos/reminder-feature.mkv"
-              autoPlay
-              muted
-              loop
-              className="rounded-xl border shadow-lg"
-              poster="/images/applitrack-reminder-poster.png"
-            />
-          )}
+          <video
+            src="/videos/reminder-feature.mp4"
+            autoPlay
+            muted
+            loop
+            className="rounded-xl border shadow-lg"
+            poster="/images/applitrack-reminder-poster.png"
+          />
         </div>
       </div>
       {/* DOCUMENT MANAGEMENT FUNCTIONALITY */}
@@ -122,24 +98,14 @@ export const ProductFeatures = () => {
           </Button>
         </div>
         <div className="flex-1">
-          {isMobile ? (
-            <Image
-              src="/images/manage-document-feature.png"
-              height={1000}
-              width={1000}
-              alt="Document Management Feature"
-              className="rounded-xl border shadow-lg"
-            />
-          ) : (
-            <video
-              src="/videos/document-management-feature.mkv"
-              autoPlay
-              muted
-              loop
-              className="rounded-xl border shadow-lg"
-              poster="/images/applitrack-document-management-poster.png"
-            />
-          )}
+          <video
+            src="/videos/document-management-feature.mp4"
+            autoPlay
+            muted
+            loop
+            className="rounded-xl border shadow-lg"
+            poster="/images/applitrack-document-management-poster.png"
+          />
         </div>
       </div>
     </m.div>
