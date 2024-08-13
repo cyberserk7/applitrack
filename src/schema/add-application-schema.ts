@@ -11,13 +11,13 @@ export const applicationStatuses = [
 ]
 
 export const addApplicationSchema = z.object({
-  jobPostLink: z.string().min(1),
-  jobRole: z.string().min(1),
-  companyName: z.string().min(1),
-  currency: z.enum(["INR", "USD", "EUR"]).optional().nullable(),
-  salary: z.coerce.number().optional(),
-  jobCountry: z.string().optional(),
-  jobLocation: z.string().optional(),
+  jobPostLink: z.string().min(1, "Required"),
+  jobRole: z.string().min(1, "Required"),
+  companyName: z.string().min(1, "Required"),
+  currency: z.enum(["INR", "USD", "EUR"]).nullable(),
+  salary: z.coerce.number().nullable(),
+  jobCountry: z.string().nullable(),
+  jobLocation: z.string().nullable(),
   workType: z.enum(["Onsite", "Remote"]),
   applicationStatus: z.enum(["Bookmarked", "Applied"]),
 });

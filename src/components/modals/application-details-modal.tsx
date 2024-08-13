@@ -10,10 +10,16 @@ import {
 import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { ArrowLeft, ArrowRight, Link2, Loader2, Trash } from "lucide-react";
+import { ArrowLeft, ArrowRight, Edit, Trash } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useState } from "react";
+import {
+  exportCanMoveToNextStep,
+  formatSalary,
+  getDaysUntilInterview,
+  getNextAndPrevStep,
+} from "@/lib/utils";
 
 export const ApplicationDetailsModal = () => {
   const [loading, setLoading] = useState(false);
@@ -62,44 +68,18 @@ export const ApplicationDetailsModal = () => {
     }
   };
 
-  let nextStep: string | undefined = undefined;
-  let prevStep: string | undefined = undefined;
+  const salary = formatSalary(application?.salary, application?.currency);
 
-  switch (application?.applicationStatus) {
-    case "Bookmarked":
-      nextStep = "Applied";
-      break;
-    case "Applied":
-      nextStep = "Interview Scheduled";
-      prevStep = "Bookmarked";
-      break;
-    case "Interview Scheduled":
-      nextStep = "Got Offer";
-      prevStep = "Applied";
-      break;
-    case "Got Offer":
-      break;
-    default:
-      break;
-  }
+  const { nextStep, prevStep } = getNextAndPrevStep(
+    application?.applicationStatus
+  );
 
-  let daysUntilInterview = 0;
-  if (application?.interviewDate) {
-    const today = new Date();
-    const interviewDate = new Date(application.interviewDate);
-    daysUntilInterview = Math.ceil(
-      (interviewDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-    );
-  }
+  const daysUntilInterview = getDaysUntilInterview(application?.interviewDate);
 
-  let canMoveToNextStep = true;
-  if (
-    application?.applicationStatus === "Interview Scheduled" &&
-    (daysUntilInterview > 0 || !application.interviewDate)
-  ) {
-    canMoveToNextStep = false;
-  }
-
+  let canMoveToNextStep = exportCanMoveToNextStep(
+    application,
+    daysUntilInterview
+  );
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -125,10 +105,10 @@ export const ApplicationDetailsModal = () => {
             </div>
             <div className="rounded-lg py-2 px-3 border bg-zinc-100/40">
               <div className="text-gray-700">
-                <span className="font-semibold">Salary: </span>
-                <span className="">
-                  Rs.{application?.salary} Per Annum
-                </span>{" "}
+                <>
+                  <span className="font-semibold">Salary: </span>
+                  <span className="">{salary}</span>{" "}
+                </>
               </div>
             </div>
 
@@ -208,17 +188,29 @@ export const ApplicationDetailsModal = () => {
                 </Button>
               )}
             </div>
-            <Button
-              className="w-full text-sm"
-              variant={"destructive"}
-              size={"sm"}
-              disabled={loading}
-              onClick={() =>
-                handleArchiveApplication(application?._id as string)
-              }
-            >
-              Remove Application
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                className="w-full text-sm flex-1 flex items-center gap-1.5"
+                variant={"outline"}
+                size={"sm"}
+                disabled={loading}
+                onClick={() => onOpen("edit-application", { application })}
+              >
+                <Edit className="size-4" strokeWidth={2.5} /> Edit Application
+              </Button>
+              <Button
+                className="w-full text-sm flex-1 flex items-center gap-1.5"
+                variant={"destructive"}
+                size={"sm"}
+                disabled={loading}
+                onClick={() =>
+                  handleArchiveApplication(application?._id as string)
+                }
+              >
+                <Trash className="size-4" strokeWidth={2.5} />
+                Delete Application
+              </Button>
+            </div>
           </div>
         </div>
       </DialogContent>

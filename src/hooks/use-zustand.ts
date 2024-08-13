@@ -2,7 +2,7 @@ import { DocumentType } from "@/models/Document";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import { create } from "zustand";
-export type ModalType = "new-application" | "trash" | "feedback" | "settings" | "search" | "support" | "edit-application" | "application-details" | "set-interview-date" | "document-upload" | "view-document"
+export type ModalType = "new-application" | "trash" | "feedback" | "settings" | "search" | "support" | "edit-application" | "application-details" | "set-interview-date" | "document-upload" | "view-document" | "edit-application"
 
 interface ModalData {
     application?: JobApplication;

@@ -7,7 +7,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
-export const getDaysUntilInterview = (interviewDate: Date) => {
+export const getDaysUntilInterview = (interviewDate: Date | undefined) => {
+  if (!interviewDate) {
+    return 0;
+  }
   const today = new Date();
   const interviewDateDate = new Date(interviewDate);
   return Math.ceil(
@@ -15,17 +18,17 @@ export const getDaysUntilInterview = (interviewDate: Date) => {
   );
 };
 
-export const exportCanMoveToNextStep = (application: JobApplication , daysUntilInterview: number) => {
+export const exportCanMoveToNextStep = (application: JobApplication | undefined, daysUntilInterview: number) => {
   if (
-    application.applicationStatus === "Interview Scheduled" &&
-    (daysUntilInterview > 0 || !application.interviewDate)
+    application?.applicationStatus === "Interview Scheduled" &&
+    (daysUntilInterview > 0 || !application?.interviewDate)
   ) {
     return false;
   }
   return true;
 }
 
-export const getNextAndPrevStep = (applicationStatus: string) => {
+export const getNextAndPrevStep = (applicationStatus: string | undefined) => {
   let nextStep: string | undefined = undefined;
   let prevStep: string | undefined = undefined;
 

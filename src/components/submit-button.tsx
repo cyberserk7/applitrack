@@ -14,7 +14,7 @@ export const SubmitButton = ({
   return (
     <Button
       type="submit"
-      className={cn(" w-full", className)}
+      className={cn("flex-1 w-full", className)}
       disabled={isLoading}
       size={"lg"}
     >

@@ -13,7 +13,6 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
 import { UnbookmarkButton } from "./unbookmark-button";
-import { Button } from "@/components/ui/button";
 
 export const ApplicationGridItem = ({
   application,
@@ -93,7 +92,7 @@ export const ApplicationGridItem = ({
             className={cn(
               "px-2 py-1 rounded bg-orange-100/30 text-xs text-orange-600 border border-orange-200",
               !application.currency &&
-                "bg-zinc-100/30 text-zinc-600 border-zinc-200"
+                "bg-zinc-100/30 text-zinc-500 border-zinc-300 capitalize"
             )}
           >
             {salary}

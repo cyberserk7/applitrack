@@ -36,8 +36,6 @@ export const ApplicationListItem = ({
 }) => {
   const { onOpen } = useModalStore();
 
-  const salary = formatSalary(application.salary, application.currency);
-
   const {
     applications,
     setApplications,
@@ -69,6 +67,8 @@ export const ApplicationListItem = ({
       refreshOverlappingInterviews();
     }
   };
+
+  const salary = formatSalary(application.salary, application.currency);
 
   const { nextStep, prevStep } = getNextAndPrevStep(
     application.applicationStatus
@@ -107,7 +107,7 @@ export const ApplicationListItem = ({
           className={cn(
             "px-2 py-1 rounded bg-orange-100/30 text-xs text-orange-600 border border-orange-200",
             !application.currency &&
-              "bg-zinc-100/30 text-zinc-600 border-zinc-200"
+              "bg-zinc-100/30 text-zinc-500 border-zinc-300 capitalize"
           )}
         >
           {salary}

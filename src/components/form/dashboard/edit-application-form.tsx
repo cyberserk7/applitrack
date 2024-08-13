@@ -10,12 +10,11 @@ import {
 } from "@/components/ui/form";
 import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
 import {
-  addApplicationSchema,
   applicationStatuses,
   workTypes,
 } from "@/schema/add-application-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -32,12 +31,15 @@ import { toast } from "sonner";
 import { ErrorMsg } from "../error-msg";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { JobApplication } from "@/models/User";
+import { editApplicationSchema } from "@/schema/edit-application-schema";
+import { Button } from "@/components/ui/button";
 
-interface AddApplicationFormProps {
-  status?: string;
-}
-
-export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
+export const EditAppplicationForm = ({
+  application,
+}: {
+  application: JobApplication;
+}) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const { onClose } = useModalStore();
@@ -49,23 +51,24 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
   const { refreshApplications, refreshOverlappingInterviews } =
     useApplicationStore();
 
-  const form = useForm<z.infer<typeof addApplicationSchema>>({
-    resolver: zodResolver(addApplicationSchema),
+  const form = useForm<z.infer<typeof editApplicationSchema>>({
+    resolver: zodResolver(editApplicationSchema),
     defaultValues: {
-      jobRole: "",
-      companyName: "",
-      currency: undefined,
-      salary: undefined,
-      jobCountry: undefined,
-      jobLocation: undefined,
-      workType: undefined,
+      jobRole: application && application.jobRole,
+      companyName: application && application.companyName,
+      currency: (application && application.currency) || undefined,
+      salary: (application && application.salary) || undefined,
+      jobCountry: application && application.jobCountry,
+      jobLocation: application && application.jobLocation,
+      workType: application && application.workType,
       //@ts-ignore
-      applicationStatus: status || undefined,
-      jobPostLink: "",
+      applicationStatus:
+        (application && application.applicationStatus) || undefined,
+      jobPostLink: application && application.jobPostLink,
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof addApplicationSchema>) => {
+  const onSave = async (values: z.infer<typeof editApplicationSchema>) => {
     setSubmitting(true);
     let payload = {};
     if (salaryNotDisclosed) {
@@ -88,8 +91,13 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
       };
     }
 
+    console.log(payload);
+
     try {
-      const res = await axios.post("/api/add-application", payload);
+      const res = await axios.post(
+        `/api/edit-application?applicationId=${application?._id}`,
+        payload
+      );
       if (res.data.success) {
         refreshApplications();
         refreshOverlappingInterviews();
@@ -105,9 +113,18 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
     }
   };
 
+  useEffect(() => {
+    if (application?.workType === "Remote") {
+      setIsRemote(true);
+    }
+    if (!application?.currency || !application?.salary) {
+      setSalaryNotDisclosed(true);
+    }
+  }, []);
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSave)} className="space-y-8">
         <div className="space-y-2">
           <FormField
             control={form.control}
@@ -361,7 +378,17 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
         </div>
         <div className="flex flex-col gap-2">
           {error && <ErrorMsg error={error} />}
-          <SubmitButton isLoading={submitting} label="Add Application" />
+          <div className="flex gap-2 items-center w-full">
+            <Button
+              size={"lg"}
+              className="flex-1 w-full"
+              variant={"outline"}
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
+            <SubmitButton isLoading={submitting} label="Save Application" />
+          </div>
         </div>
       </form>
     </Form>
