@@ -30,8 +30,6 @@ export async function PATCH(request: Request) {
 
         existingUser.jobApplications.find((application: JobApplication) => application._id!.toString() === applicationId).applicationStatus = status;
 
-        console.log(existingUser.jobApplications.find((application: JobApplication) => application._id!.toString() === applicationId))
-
         await existingUser.save();  
 
         return Response.json({  

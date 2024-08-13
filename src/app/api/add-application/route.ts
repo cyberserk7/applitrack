@@ -32,7 +32,7 @@ export async function POST(req: Request) {
             })
         }
 
-        const { jobPostLink, jobRole, companyName, salary, jobLocation, jobCountry, workType, applicationStatus } = res.data;
+        const { jobPostLink, jobRole, companyName, salary, jobLocation, jobCountry, workType, applicationStatus, currency } = res.data;
 
         const existingUser = await UserModel.findOne({email: user.email});
 
@@ -53,7 +53,8 @@ export async function POST(req: Request) {
             jobLocation,
             jobCountry,
             workType,
-            applicationStatus
+            applicationStatus,
+            currency
         })
 
         await existingUser.save();

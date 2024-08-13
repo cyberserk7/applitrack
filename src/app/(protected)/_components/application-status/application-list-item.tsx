@@ -2,7 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import { useApplicationStore, useModalStore } from "@/hooks/use-zustand";
-import { cn } from "@/lib/utils";
+import {
+  cn,
+  exportCanMoveToNextStep,
+  formatSalary,
+  getDaysUntilInterview,
+  getNextAndPrevStep,
+} from "@/lib/utils";
 import { JobApplication } from "@/models/User";
 import axios from "axios";
 import {
@@ -11,7 +17,7 @@ import {
   SquareArrowOutUpRight,
   SquareArrowUpRight,
 } from "lucide-react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { toast } from "sonner";
 import { UnbookmarkButton } from "./unbookmark-button";
 
@@ -28,9 +34,9 @@ export const ApplicationListItem = ({
   index: number;
   isMobile: boolean;
 }) => {
-  const LPA = application.salary / 100000;
-  const isRemote = application.workType === "Remote";
   const { onOpen } = useModalStore();
+
+  const salary = formatSalary(application.salary, application.currency);
 
   const {
     applications,
@@ -64,46 +70,20 @@ export const ApplicationListItem = ({
     }
   };
 
-  let nextStep: string | undefined = undefined;
-  let prevStep: string | undefined = undefined;
-
-  switch (application.applicationStatus) {
-    case "Bookmarked":
-      nextStep = "Applied";
-      break;
-    case "Applied":
-      nextStep = "Interview Scheduled";
-      prevStep = "Bookmarked";
-      break;
-    case "Interview Scheduled":
-      nextStep = "Got Offer";
-      prevStep = "Applied";
-      break;
-    case "Got Offer":
-      break;
-    default:
-      break;
-  }
+  const { nextStep, prevStep } = getNextAndPrevStep(
+    application.applicationStatus
+  );
 
   const isInterviewScheduled =
     application.applicationStatus === "Interview Scheduled";
+  const isRemote = application.workType === "Remote";
 
-  let daysUntilInterview = 0;
-  if (application.interviewDate) {
-    const today = new Date();
-    const interviewDate = new Date(application.interviewDate);
-    daysUntilInterview = Math.ceil(
-      (interviewDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-    );
-  }
+  const daysUntilInterview = getDaysUntilInterview(application.interviewDate);
 
-  let canMoveToNextStep = true;
-  if (
-    application.applicationStatus === "Interview Scheduled" &&
-    (daysUntilInterview > 0 || !application.interviewDate)
-  ) {
-    canMoveToNextStep = false;
-  }
+  let canMoveToNextStep = exportCanMoveToNextStep(
+    application,
+    daysUntilInterview
+  );
 
   return (
     <div
@@ -123,8 +103,14 @@ export const ApplicationListItem = ({
         <span className="text-xs text-gray-400 hidden md:block">
           {application.applicationStatus[0]}A-{index + 1}
         </span>
-        <span className="px-2 py-1 rounded bg-orange-100/30 text-xs text-orange-600 border border-orange-200 ">
-          {LPA} LPA
+        <span
+          className={cn(
+            "px-2 py-1 rounded bg-orange-100/30 text-xs text-orange-600 border border-orange-200",
+            !application.currency &&
+              "bg-zinc-100/30 text-zinc-600 border-zinc-200"
+          )}
+        >
+          {salary}
         </span>
         <span className="flex-1 text-sm font-medium line-clamp-1">
           {application.jobRole}, {application.companyName}{" "}

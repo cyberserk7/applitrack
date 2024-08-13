@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Github, Star } from "lucide-react";
 import Image from "next/image";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 
 export const LandingNavbar = async () => {
   return (

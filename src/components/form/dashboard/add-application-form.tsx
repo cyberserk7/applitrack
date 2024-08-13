@@ -30,6 +30,8 @@ import { SubmitButton } from "@/components/submit-button";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import { ErrorMsg } from "../error-msg";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 interface AddApplicationFormProps {
   status?: string;
@@ -40,6 +42,10 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
   const [error, setError] = useState("");
   const { onClose } = useModalStore();
   const [isRemote, setIsRemote] = useState(false);
+  const [currency, setCurrency] = useState<"INR" | "USD" | "EUR" | undefined>(
+    undefined
+  );
+  const [salaryNotDisclosed, setSalaryNotDisclosed] = useState(false);
   const { refreshApplications, refreshOverlappingInterviews } =
     useApplicationStore();
 
@@ -48,6 +54,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
     defaultValues: {
       jobRole: "",
       companyName: "",
+      currency: undefined,
       salary: undefined,
       jobCountry: undefined,
       jobLocation: undefined,
@@ -60,8 +67,20 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
 
   const onSubmit = async (values: z.infer<typeof addApplicationSchema>) => {
     setSubmitting(true);
+    let payload = {};
+    if (salaryNotDisclosed) {
+      payload = {
+        ...values,
+        currency: null,
+        salary: null,
+      };
+    } else {
+      payload = {
+        ...values,
+      };
+    }
     try {
-      const res = await axios.post("/api/add-application", values);
+      const res = await axios.post("/api/add-application", payload);
       if (res.data.success) {
         refreshApplications();
         refreshOverlappingInterviews();
@@ -99,6 +118,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="jobRole"
@@ -117,6 +137,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="companyName"
@@ -135,27 +156,91 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="salary"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Salary{" "}
-                  <span className="text-gray-400 font-normal">(Per Annum)</span>
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="Rs. 28,00,000"
-                    type="number"
-                    className="w-full"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+          <div className="flex flex-col gap-3 py-1 pt-2">
+            <FormLabel className="w-full flex items-center justify-between">
+              <div className="flex gap-0.5">
+                Salary{" "}
+                <span className="text-gray-400 font-normal">(Per Annum)</span>
+              </div>
+              <Label className="flex items-center gap-2 text-zinc-700 text-sm cursor-pointer">
+                <Checkbox
+                  checked={salaryNotDisclosed}
+                  onCheckedChange={() => {
+                    setSalaryNotDisclosed(!salaryNotDisclosed);
+                    if (salaryNotDisclosed) {
+                      form.setValue("currency", undefined);
+                      form.setValue("salary", undefined);
+                    }
+                  }}
+                />
+                <span>Salary Not Disclosed</span>
+              </Label>
+            </FormLabel>
+            {!salaryNotDisclosed && (
+              <div className="flex w-full items-center gap-2">
+                <FormField
+                  control={form.control}
+                  name="currency"
+                  render={({ field }) => (
+                    <FormItem className="">
+                      <FormControl>
+                        <Select
+                          value={salaryNotDisclosed ? undefined : field.value}
+                          onValueChange={field.onChange}
+                          onOpenChange={() => {
+                            if (field.value) {
+                              setCurrency(field.value);
+                            }
+                          }}
+                        >
+                          <SelectTrigger className="min-w-20 bg-zinc-50">
+                            <SelectValue
+                              placeholder="Select Currency"
+                              className=""
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value={"INR"}>INR</SelectItem>
+                            <SelectItem value={"USD"}>USD</SelectItem>
+                            <SelectItem value={"EUR"}>EUR</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="salary"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <Input
+                          {...field}
+                          value={salaryNotDisclosed ? undefined : field.value}
+                          placeholder={
+                            salaryNotDisclosed
+                              ? "Salary Not Disclosed"
+                              : currency && currency === "INR"
+                              ? "₹ XXXXXXXX"
+                              : currency === "USD"
+                              ? "$ XXXXXXXX"
+                              : "€ XXXXXXXX"
+                          }
+                          type="number"
+                          className="w-full"
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             )}
-          />
+          </div>
+
           <FormField
             control={form.control}
             name="workType"

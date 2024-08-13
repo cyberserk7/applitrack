@@ -16,7 +16,7 @@ import { z } from "zod";
 import { SubmitButton } from "../submit-button";
 import { ErrorMsg } from "./error-msg";
 import { signInSchema } from "@/schema/sign-in-schema";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { CheckEmailMsg } from "./check-email-msg";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";

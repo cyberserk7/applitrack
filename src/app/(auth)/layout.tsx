@@ -1,6 +1,5 @@
-import Ripple from "@/components/magicui/ripple";
 import Image from "next/image";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 
 export default function AuthLayout({
   children,

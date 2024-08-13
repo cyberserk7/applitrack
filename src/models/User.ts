@@ -12,6 +12,7 @@ export interface JobApplication extends Document {
     jobPostLink: string;
     jobRole: string;
     companyName: string;
+    currency: "INR" | "USD" | "EUR" | null;
     salary: number;
     notes: string;
     interviewDate: Date;
@@ -37,9 +38,14 @@ const JobApplicationSchema = new Schema<JobApplication>({
         type: String,
         required: [true, "Company name is required"],
     },
+    currency: {
+        type: String,
+        default: null,
+        enum: ["INR", "USD", "EUR", null],
+    },
     salary: {
         type: Number,
-        required: [true, "Salary is required"],
+        default: null,
     },
     notes: {
         type: String,

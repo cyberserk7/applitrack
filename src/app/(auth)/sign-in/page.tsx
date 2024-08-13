@@ -1,5 +1,5 @@
 import { SignInForm } from "@/components/form/sign-in-form";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 
 export default function SignInPage() {
   return (

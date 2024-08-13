@@ -5,7 +5,7 @@ import { DocumentType } from "@/models/Document";
 import { FileDown, View } from "lucide-react";
 import { DeleteDocumentButton } from "./delete-document-button";
 import { useModalStore } from "@/hooks/use-zustand";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 
 export const DocumentListItem = ({
   document: doc,

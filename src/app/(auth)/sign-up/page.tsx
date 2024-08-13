@@ -3,7 +3,7 @@
 import { SignUpForm } from "@/components/form/sign-up-form";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function SignUpPage() {

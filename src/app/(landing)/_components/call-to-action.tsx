@@ -2,7 +2,7 @@
 
 import ShimmerButton from "@/components/magicui/shimmer-button";
 import { ChevronRight } from "lucide-react";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { motion as m } from "framer-motion";
 
 export const CallToAction = () => {
