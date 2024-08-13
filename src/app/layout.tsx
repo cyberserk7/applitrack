@@ -7,6 +7,7 @@ import AuthProvider from "@/providers/AuthProvider";
 import { ModalProvider } from "@/providers/ModalProvider";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 import { ViewTransitions } from "next-view-transitions";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter_Tight({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
               <ModalProvider />
             </body>
           </ViewTransitions>
+          <Analytics />
         </EdgeStoreProvider>
       </AuthProvider>
     </html>

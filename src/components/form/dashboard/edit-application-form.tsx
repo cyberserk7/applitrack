@@ -91,8 +91,6 @@ export const EditAppplicationForm = ({
       };
     }
 
-    console.log(payload);
-
     try {
       const res = await axios.post(
         `/api/edit-application?applicationId=${application?._id}`,
