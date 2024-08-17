@@ -355,7 +355,11 @@ export const EditAppplicationForm = ({
             >
               Cancel
             </Button>
-            <SubmitButton isLoading={submitting} label="Save Application" />
+            <SubmitButton
+              isLoading={submitting}
+              disabled={submitting}
+              label="Save Application"
+            />
           </div>
         </div>
       </form>

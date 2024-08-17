@@ -131,6 +131,7 @@ export const FeedbackModal = () => {
                   label="Submit"
                   isLoading={loading}
                   className="w-max"
+                  disabled={loading}
                 />
               </div>
             </form>

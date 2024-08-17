@@ -97,6 +97,7 @@ export const SupportModal = () => {
                   label="Submit"
                   isLoading={loading}
                   className="w-max"
+                  disabled={loading}
                 />
               </div>
             </form>

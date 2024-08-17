@@ -22,7 +22,13 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-export const SignInForm = () => {
+export const SignInForm = ({
+  loading,
+  setLoading,
+}: {
+  loading: boolean;
+  setLoading: (value: boolean) => void;
+}) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [emailPrompt, setEmailPrompt] = useState("");
@@ -57,6 +63,11 @@ export const SignInForm = () => {
           if (res?.error === "CredentialsSignin") {
             setError("Invalid email or password");
           }
+        }
+        if (res?.error === "OAuth Account") {
+          setError(
+            "An account with Google exists already. Please sign in with Google."
+          );
         }
       }
     } catch (error) {
@@ -118,7 +129,11 @@ export const SignInForm = () => {
           <div className="mt-10 space-y-2">
             {emailPrompt && <CheckEmailMsg emailPrompt={emailPrompt} />}
             {error && <ErrorMsg error={error} />}
-            <SubmitButton label="Submit" isLoading={submitting} />
+            <SubmitButton
+              label="Log In"
+              disabled={loading || submitting}
+              isLoading={submitting}
+            />
           </div>
         </form>
       </Form>

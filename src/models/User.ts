@@ -6,6 +6,7 @@ export interface User extends Document {
     email: string;
     isVerified: boolean;
     jobApplications: JobApplication[];
+    provider: string;
 }
 
 export interface JobApplication extends Document {
@@ -98,7 +99,7 @@ const UserSchema = new Schema<User>({
     },
     password: {
         type: String,
-        required: [true, "Password is required"],
+        required: false,
     },
     email: {
         type: String,
@@ -110,6 +111,10 @@ const UserSchema = new Schema<User>({
         default: false
     },
     jobApplications: [JobApplicationSchema],
+    provider: {
+        type: String,
+        default: "credentials",
+    }
 })
 
 const UserModel = (mongoose.models.User || mongoose.model("User", UserSchema));

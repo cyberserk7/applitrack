@@ -19,7 +19,11 @@ import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export const ChangePasswordForm = () => {
+export const ChangePasswordForm = ({
+  setSuccess,
+}: {
+  setSuccess: (text: string) => void;
+}) => {
   const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
 
@@ -43,13 +47,18 @@ export const ChangePasswordForm = () => {
         email,
       });
       if (res.data.success) {
-        router.replace("/sign-in");
-        toast.success("Password changed successfully");
+        setSuccess(
+          "Password has been changed successfully. You will now be redirected to sign in page shortly."
+        );
+        setTimeout(() => {
+          router.replace("/sign-in");
+        }, 3000);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error.response?.data.message);
       }
+      toast.error("Something went wrong");
     } finally {
       setSubmitting(false);
     }
@@ -84,7 +93,11 @@ export const ChangePasswordForm = () => {
             </FormItem>
           )}
         />
-        <SubmitButton label="Submit" isLoading={submitting} />
+        <SubmitButton
+          label="Change Password"
+          isLoading={submitting}
+          disabled={submitting}
+        />
       </form>
     </Form>
   );

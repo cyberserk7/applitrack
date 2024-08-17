@@ -365,6 +365,7 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
             isLoading={submitting}
             label="Add Application"
             className="h-max py-3"
+            disabled={submitting}
           />
         </div>
       </form>

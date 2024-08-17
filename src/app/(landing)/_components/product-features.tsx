@@ -9,7 +9,7 @@ import { motion as m } from "framer-motion";
 export const ProductFeatures = () => {
   return (
     <m.div
-      className="flex flex-col gap-10 md:gap-32 xl w-full mt-12 md:mt-20"
+      className="flex flex-col gap-10 md:gap-20 xl w-full mt-12 md:mt-20"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
@@ -36,7 +36,7 @@ export const ProductFeatures = () => {
         </div>
         <div className="flex-1">
           <video
-            src="/videos/track-feature.mp4"
+            src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723713584/track-feature.mp4"
             autoPlay
             muted
             loop
@@ -68,7 +68,7 @@ export const ProductFeatures = () => {
         </div>
         <div className="flex-1">
           <video
-            src="/videos/reminder-feature.mp4"
+            src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723713585/reminder-feature.mp4"
             autoPlay
             muted
             loop
@@ -101,7 +101,7 @@ export const ProductFeatures = () => {
         </div>
         <div className="flex-1">
           <video
-            src="/videos/document-management-feature.mp4"
+            src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723713584/document-management-feature.mp4"
             autoPlay
             muted
             loop

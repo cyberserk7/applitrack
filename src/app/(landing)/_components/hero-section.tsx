@@ -5,7 +5,7 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { motion as m } from "framer-motion";
 
-export const CallToAction = () => {
+export const HeroSection = () => {
   return (
     <m.div
       className="text-center flex flex-col items-center md:items-center"

@@ -116,7 +116,7 @@ export const DocumentUploadForm = ({ type }: { type: string }) => {
               )}
             />
           </div>
-          <SubmitButton label="Submit" isLoading={loading} />
+          <SubmitButton label="Submit" isLoading={loading} disabled={loading} />
         </form>
       </Form>
     </div>

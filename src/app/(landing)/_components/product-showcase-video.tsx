@@ -10,7 +10,7 @@ export const ProductShowcaseVideo = () => {
       transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
     >
       <video
-        src="/videos/applitrack-showcase.mp4"
+        src="https://res.cloudinary.com/dfdlzzfej/video/upload/v1723713585/applitrack-showcase.mp4"
         autoPlay
         muted
         loop

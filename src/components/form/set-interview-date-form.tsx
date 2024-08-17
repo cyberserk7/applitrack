@@ -110,7 +110,7 @@ export function SetInterviewDateForm({
             </FormItem>
           )}
         />
-        <SubmitButton isLoading={loading} label="Submit" />
+        <SubmitButton isLoading={loading} disabled={loading} label="Submit" />
         <FormField
           control={form.control}
           name="sendEmail"

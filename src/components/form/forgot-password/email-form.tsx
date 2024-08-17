@@ -70,7 +70,11 @@ export const EmailForm = ({ nextStep }: { nextStep: () => void }) => {
         />
         <div className="space-y-2">
           {error && <ErrorMsg error={error} />}
-          <SubmitButton label="Submit" isLoading={submitting} />
+          <SubmitButton
+            label="Send OTP"
+            isLoading={submitting}
+            disabled={submitting}
+          />
         </div>
       </form>
     </Form>

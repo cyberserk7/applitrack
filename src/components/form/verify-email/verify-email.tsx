@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import axios, { AxiosError } from "axios";
 import { AlertCircle, ChevronRight, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { toast } from "sonner";
 
 export const VerifyEmailChecker = ({
   setHasVerified,
@@ -22,7 +21,6 @@ export const VerifyEmailChecker = ({
     try {
       await axios.post("/api/verify-email", { token });
       setHasVerified(true);
-      toast.success("Account verified successfully.");
     } catch (error) {
       if (error instanceof AxiosError) {
         setError(error.response?.data.message);

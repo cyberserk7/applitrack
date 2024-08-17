@@ -67,7 +67,11 @@ export const OtpForm = ({ nextStep }: { nextStep: () => void }) => {
           )}
         />
         {error && <ErrorMsg error={error} />}
-        <SubmitButton label="Submit" isLoading={submitting} />
+        <SubmitButton
+          label="Submit"
+          isLoading={submitting}
+          disabled={submitting}
+        />
       </form>
     </Form>
   );

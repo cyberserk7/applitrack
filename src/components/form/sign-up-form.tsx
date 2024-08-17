@@ -21,11 +21,15 @@ import axios, { AxiosError } from "axios";
 
 export const SignUpForm = ({
   setEmailSent,
+  setLoading,
+  loading,
 }: {
   setEmailSent: (value: boolean) => void;
+  setLoading: (value: boolean) => void;
+  loading: boolean;
 }) => {
-  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [credentialSubmitting, setCredentialSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -37,7 +41,8 @@ export const SignUpForm = ({
     },
   });
   const onSubmit = async (values: z.infer<typeof signUpSchema>) => {
-    setSubmitting(true);
+    setCredentialSubmitting(true);
+    setLoading(true);
     setError("");
     try {
       const res = await axios.post("/api/sign-up", values);
@@ -51,7 +56,8 @@ export const SignUpForm = ({
         setError(error.response?.data.message);
       }
     } finally {
-      setSubmitting(false);
+      setLoading(false);
+      setCredentialSubmitting(false);
     }
   };
 
@@ -135,7 +141,11 @@ export const SignUpForm = ({
           </div>
           <div className="mt-10 space-y-2">
             {error && <ErrorMsg error={error} />}
-            <SubmitButton label="Create Account" isLoading={submitting} />
+            <SubmitButton
+              label="Create Account"
+              disabled={credentialSubmitting || loading}
+              isLoading={credentialSubmitting}
+            />
           </div>
         </form>
       </Form>

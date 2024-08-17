@@ -7,8 +7,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="px-5 flex flex-col gap-10 py-10 md:py-0 justify-start md:justify-center items-center min-h-full w-full bg-gray-200 relative">
-      <Link href={"/"} className="flex items-center gap-1 z-10">
+    <div className="p-0 lg:p-5 h-full bg-dashboardbg flex items-center justify-center">
+      {/* <Link href={"/"} className="flex items-center gap-1 z-10">
         <Image
           src={"/logo-black.png"}
           height={500}
@@ -17,8 +17,8 @@ export default function AuthLayout({
           className="h-7 w-fit"
         />
         <h1 className="font-semibold text-xl">AppliTrack</h1>
-      </Link>
-      {children}
+      </Link> */}
+      <div className="h-full w-full">{children}</div>
     </div>
   );
 }
