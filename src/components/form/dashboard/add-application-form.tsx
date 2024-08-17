@@ -66,13 +66,14 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
   });
 
   const onSubmit = async (values: z.infer<typeof addApplicationSchema>) => {
+    console.log(values);
     setSubmitting(true);
     let payload = {};
     if (salaryNotDisclosed) {
       payload = {
         ...values,
-        currency: null,
-        salary: null,
+        currency: undefined,
+        salary: undefined,
       };
     } else {
       payload = {
@@ -83,8 +84,8 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
     if (isRemote) {
       payload = {
         ...payload,
-        jobCountry: null,
-        jobLocation: null,
+        jobCountry: undefined,
+        jobLocation: undefined,
       };
     }
 
@@ -104,6 +105,10 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
       setSubmitting(false);
     }
   };
+
+  // const onSubmit = async (values: z.infer<typeof addApplicationSchema>) => {
+  //   console.log(values);
+  // };
 
   return (
     <Form {...form}>
@@ -177,8 +182,8 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
                   onCheckedChange={() => {
                     setSalaryNotDisclosed(!salaryNotDisclosed);
                     if (salaryNotDisclosed) {
-                      form.setValue("currency", undefined!);
-                      form.setValue("salary", null);
+                      form.setValue("currency", undefined);
+                      form.setValue("salary", undefined);
                     }
                   }}
                 />
@@ -195,11 +200,9 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
                       <FormControl>
                         <Select
                           value={salaryNotDisclosed ? undefined : field.value!}
-                          onValueChange={field.onChange}
-                          onOpenChange={() => {
-                            if (field.value) {
-                              setCurrency(field.value);
-                            }
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            setCurrency(value as "INR" | "USD" | "EUR");
                           }}
                         >
                           <SelectTrigger className="min-w-20 bg-zinc-50">
@@ -259,9 +262,9 @@ export const AddApplicationForm = ({ status }: AddApplicationFormProps) => {
                 <FormControl>
                   <Select
                     value={field.value}
-                    onValueChange={field.onChange}
-                    onOpenChange={() => {
-                      if (field.value === "Remote") {
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      if (value === "Remote") {
                         setIsRemote(true);
                       } else {
                         setIsRemote(false);

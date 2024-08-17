@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/db-connect";
 import { authOptions } from "@/lib/options";
+import ApplicationCountModel from "@/models/ApplicationCount";
 import UserModel from "@/models/User";
 import { addApplicationSchema } from "@/schema/add-application-schema";
 import { getServerSession } from "next-auth";
@@ -60,6 +61,10 @@ export async function POST(req: Request) {
 
         await existingUser.save();
         revalidatePath("/dashboard");
+
+        const applicationCount = await ApplicationCountModel.find();
+        applicationCount[0].count = applicationCount[0].count + 1;
+        await applicationCount[0].save();
 
         return Response.json({
             success: true,

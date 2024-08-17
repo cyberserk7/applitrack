@@ -41,11 +41,13 @@ const JobApplicationSchema = new Schema<JobApplication>({
     },
     currency: {
         type: String,
+        required: false,
         default: null,
         enum: ["INR", "USD", "EUR", null],
     },
     salary: {
         type: Number,
+        required: false,
         default: null,
     },
     notes: {

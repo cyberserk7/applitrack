@@ -30,7 +30,7 @@ export default function ForgotPasswordPage() {
     <div className="h-full w-full flex items-start lg:items-center justify-center px-5">
       <div className="w-full md:max-w-sm rounded-xl bg-white px-5 py-5 space-y-5 shadow-md mt-40 lg:mt-0">
         {success ? (
-          <span className="text-sm text-green-600">{success}</span>
+          <span className="text-sm text-green-600"> {success}</span>
         ) : (
           <>
             <div className="flex flex-col gap-5">
