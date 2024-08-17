@@ -54,13 +54,13 @@ export const HeroSection = () => {
             <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition" />
           </ShimmerButton>
         </Link>
-        <span className={cn("text-zinc-400 text-sm z-10")}>
-          <span>Tracking </span>
+        <span className={cn("text-zinc-400 text-sm z-10 flex gap-1.5")}>
+          <span>Tracking</span>
           <NumberTicker
             value={count}
-            className="text-zinc-500 tracking-tight font-extrabold"
+            className="text-zinc-400 tracking-tighter font-semibold w-max"
           />
-          <span> applications and counting!</span>
+          <span>applications and counting!</span>
         </span>
       </div>
     </m.div>
