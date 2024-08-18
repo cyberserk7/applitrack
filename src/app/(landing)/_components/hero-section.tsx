@@ -1,16 +1,15 @@
 "use client";
 
 import ShimmerButton from "@/components/magicui/shimmer-button";
-import { ChevronRight } from "lucide-react";
+import { ArrowRightIcon, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NumberTicker from "@/components/magicui/number-ticker";
-import { Shadows_Into_Light } from "next/font/google";
 import { cn } from "@/lib/utils";
-
-const indieFlower = Shadows_Into_Light({ subsets: ["latin"], weight: ["400"] });
+import AnimatedGradientText from "@/components/magicui/animated-gradient-text";
+import AnimatedShinyText from "@/components/magicui/animated-shiny-text";
 
 export const HeroSection = () => {
   const [count, setCount] = useState(0);
@@ -25,15 +24,14 @@ export const HeroSection = () => {
     };
     getCount();
   }, []);
-
   return (
     <m.div
-      className="text-center flex flex-col items-center md:items-center"
+      className="text-center flex flex-col items-center md:items-center gap-2"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1, ease: "easeInOut" }}
     >
-      <h1 className="text-[2rem] md:text-[3rem] lg:text-[3.5rem] xl:text-[3.8rem] font-bold bg-gradient-to-r from-red-600  to-yellow-600 bg-clip-text text-transparent ">
+      <h1 className="text-[2rem] md:text-[3rem]  lg:text-[3.5rem] xl:text-[3.8rem] font-bold bg-gradient-to-r from-red-600  to-yellow-600 bg-clip-text text-transparent ">
         All-In-One Job Application Manager
       </h1>
       <p className="text-gray-500/80 md:text-lg lg:text-xl">
@@ -48,20 +46,18 @@ export const HeroSection = () => {
             shimmerSize="0.1em"
             shimmerDuration="1.2s"
           >
-            <span className="whitespace-pre-wrap text-center  leading-none font-medium text-white dark:from-white dark:to-slate-900/10 lg:text-xl">
+            <span className="whitespace-pre-wrap text-center  leading-none font-medium text-white dark:from-white dark:to-slate-900/10 lg:text-xl ">
               Get started, it&apos;s free
             </span>
             <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition" />
           </ShimmerButton>
         </Link>
-        <span className={cn("text-zinc-400 text-sm z-10 flex gap-1.5")}>
-          <span>Tracking</span>
-          <NumberTicker
-            value={count}
-            className="text-zinc-400 tracking-tighter font-semibold w-max"
-          />
-          <span>applications and counting!</span>
-        </span>
+        <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400 mb-5">
+          <span>
+            Tracking <span className="font-semibold">{count}</span> applications
+            and counting!
+          </span>
+        </AnimatedShinyText>
       </div>
     </m.div>
   );
