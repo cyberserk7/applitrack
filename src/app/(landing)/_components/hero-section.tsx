@@ -1,14 +1,11 @@
 "use client";
 
 import ShimmerButton from "@/components/magicui/shimmer-button";
-import { ArrowRightIcon, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import NumberTicker from "@/components/magicui/number-ticker";
-import { cn } from "@/lib/utils";
-import AnimatedGradientText from "@/components/magicui/animated-gradient-text";
 import AnimatedShinyText from "@/components/magicui/animated-shiny-text";
 
 export const HeroSection = () => {
@@ -52,7 +49,7 @@ export const HeroSection = () => {
             <ChevronRight className="ml-2 size-4 md:size-5 group-hover:translate-x-1 transition" />
           </ShimmerButton>
         </Link>
-        <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400 mb-5">
+        <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
           <span>
             Tracking <span className="font-semibold">{count}</span> applications
             and counting!
