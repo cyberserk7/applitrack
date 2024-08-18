@@ -7,16 +7,21 @@ import { motion as m } from "framer-motion";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AnimatedShinyText from "@/components/magicui/animated-shiny-text";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const HeroSection = () => {
   const [count, setCount] = useState(0);
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     const getCount = async () => {
+      setLoading(true);
       try {
         const res = await axios.get("/api/get-application-count");
         setCount(res.data.count);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     getCount();
@@ -50,10 +55,17 @@ export const HeroSection = () => {
           </ShimmerButton>
         </Link>
         <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
-          <span>
-            Tracking <span className="font-semibold">{count}</span> applications
-            and counting!
-          </span>
+          <div className="flex gap-1.5">
+            <span>Tracking</span>
+            <div className="flex items-center">
+              {isLoading ? (
+                <Skeleton className="size-5 bg-zinc-200" />
+              ) : (
+                <span className="font-semibold">{count}</span>
+              )}
+            </div>
+            <span>applications and counting!</span>
+          </div>
         </AnimatedShinyText>
       </div>
     </m.div>
